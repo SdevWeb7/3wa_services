@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
+import { useAppStore } from "../utils/store.js";
+
 
 export const Home = () => {
 
-    const [data, setData] = useState(null);
+    const user = useAppStore.use.user()
 
 
-    useEffect(() => {
-        fetch('http://127.0.0.1:3000/api')
-           .then((res) => res.json())
-           .then((data) => setData(data.message));
-    }, []);
-
-
+    console.log(user)
 
     return <>
 
         <h1>Home</h1>
 
-        {data && <h2>{data}</h2>}
+
 
     </>;
 

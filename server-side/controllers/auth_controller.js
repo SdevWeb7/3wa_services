@@ -1,55 +1,58 @@
 import User from "../models/User.js";
-import { pool } from "../database/config.js";
 
 
-export const subscribe = (req, res) => {
+export const subscribe = async (req, res) => {
       const { email, password } = req.body;
 
-      pool.execute('SELECT * FROM users WHERE username = ?', [email], (err, result) => {
-            if (err) {
-                  req.flash('error', 'Une erreur est survenue.');
-                  res.redirect('/');
-            }
+      try {
+            const result = await User.findByEmail(email);
 
             if (result[0].length > 0) {
-                  req.flash('error', 'Ce nom d\'utilisateur est déjà pris');
-                  res.redirect('/');
+                  res.json({ message: 'Ce nom d\'utilisateur est déjà pris' });
+            } else {
+                  try {
+                        const result2 = await User.create(email, password);
+                        req.session.isLogged = true;
+
+                        const result3 = await User.findById(result2.insertId);
+                        req.session.user = result3;
+                        res.json({message: 'Votre compte a bien été créé'});
+                  } catch (err) {
+                        res.json({message: 'Une erreur est survenue lors de la création du compte.', err});
+                  }
             }
 
-            User.create(req.body.username, req.body.password).then(() => {
-                  req.flash('success', 'Votre compte a bien été créé');
-                  req.session.isLogged = true;
-            }).then(result => {
-                  pool.execute('SELECT * FROM users WHERE id = ?', [result.lastInsertId], (err, result) => {
-                        if (err) throw err;
-
-                        console.log(result[0]); // A TESTER
-                        req.session.user = result[0];
-                        res.redirect('/');
-                  })
-            })
-               .catch(() => {
-                  req.flash('error', 'Une erreur est survenue.');
-                  res.redirect('/');
-            });
-      });
+      } catch(err) {
+            res.json({ message: 'Une erreur est survenue.', err });
+      }
 
 }
 
-export const login = (req, res) => {
-      User.login(req.body.username, req.body.password).then((result) => {
+export const login = async (req, res) => {
+      const { email, password } = req.body;
+
+      try {
+            const result = await User.login(email, password)
             req.session.isLogged = true;
-            req.session.user = result;
-            req.flash('success', 'Vous êtes connecté');
-            res.redirect('/');
-      }).catch(() => {
-            req.flash('error', 'Mauvais identifiants');
-            res.redirect('/');
-      })
+            req.session.user = {
+                  id: result.id,
+                  email: result.email,
+                  sold: result.sold,
+                  services_rendered: result.services_rendered,
+                  created_at: result.created_at
+            };
+            res.json({ message: 'Vous êtes connecté' });
+      } catch (err) {
+            res.json({ message: 'Mauvais identifiants', err });
+      }
 }
 
 export const logout = (req, res) => {
       req.session.destroy();
-      req.clearCookie('connect.sid');
-      res.redirect('/');
+      res.clearCookie('connect.sid');
+      res.json({ message: 'Vous êtes déconnecté' });
+}
+
+export const api_me = (req, res) => {
+      res.json(req.session.user || {});
 }

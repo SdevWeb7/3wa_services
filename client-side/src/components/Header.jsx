@@ -6,6 +6,7 @@ export const Header = () => {
        <header>
            <nav>
                <a href="/">Home</a>
+               <a href="/auth">Authentification</a>
                <a href="/about">About</a>
            </nav>
        </header>

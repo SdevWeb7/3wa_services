@@ -1,0 +1,25 @@
+.auth-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  label {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  input {
+    text-align: center;
+    margin: 0 0 2rem 0;
+    padding: 1rem;
+    border-radius: .5rem;
+  }
+
+  .radios {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+}

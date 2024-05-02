@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import 'dotenv/config';
 import session from "express-session";
-import { flashMiddleware } from "./middlewares/flashMiddleware.js";
 import { securityMiddleware } from "./middlewares/securityMiddleware.js";
 import { router } from "./router/routes.config.js";
 import favicon from 'express-favicon';
@@ -27,7 +26,6 @@ app.use(session({
 );
 
 //Middlewares custom
-app.use(flashMiddleware);
 app.use(securityMiddleware);
 
 
