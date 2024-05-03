@@ -15,7 +15,8 @@ export const subscribe = async (req, res) => {
                         req.session.isLogged = true;
 
                         const result3 = await User.findById(result2.insertId);
-                        req.session.user = result3;
+                        console.log(result3);
+                        req.session.user = result3[0][0];
                         res.json({message: 'Votre compte a bien été créé'});
                   } catch (err) {
                         res.json({message: 'Une erreur est survenue lors de la création du compte.', err});
