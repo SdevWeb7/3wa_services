@@ -12,7 +12,7 @@ export const MenuBurger = ({handleMenu}) => {
        <Link onClick={handleMenu} className={'navlink'} to={'/'}>Home</Link>
        <Link onClick={handleMenu} className={'navlink'} to={'/about'}>Services</Link>
        <Link onClick={handleMenu} className={'navlink'} to={'/about'}>Messagerie</Link>
-       <Link onClick={handleMenu} className={'navlink'} to={'/auth'}>Mon Compte</Link>
+       <Link onClick={handleMenu} className={'navlink'} to={'/profil'}>Mon Compte</Link>
 
    </nav>, document.body)
 }

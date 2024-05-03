@@ -7,7 +7,7 @@ export const subscribe = async (req, res) => {
       try {
             const result = await User.findByEmail(email);
 
-            if (result[0].length > 0) {
+            if (result) {
                   res.json({ message: 'Ce nom d\'utilisateur est déjà pris' });
             } else {
                   try {
@@ -15,8 +15,7 @@ export const subscribe = async (req, res) => {
                         req.session.isLogged = true;
 
                         const result3 = await User.findById(result2.insertId);
-                        console.log(result3);
-                        req.session.user = result3[0][0];
+                        req.session.user = result3;
                         res.json({message: 'Votre compte a bien été créé'});
                   } catch (err) {
                         res.json({message: 'Une erreur est survenue lors de la création du compte.', err});
@@ -55,5 +54,14 @@ export const logout = (req, res) => {
 }
 
 export const api_me = (req, res) => {
-      res.json(req.session.user || {});
+      res.json({
+            id: 31,
+            email: "a@a.fr",
+            password: "aaaa",
+            sold: 1000,
+            services_rendered: 0,
+            created_at: "2024-05-03 20:57:22"
+      });
+
+      // res.json(req.session.user || {});
 }

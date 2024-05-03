@@ -3,6 +3,8 @@
 @import 'fonts';
 @import 'header';
 @import 'menu-burger';
+@import 'profil-layout';
+@import 'navbar-profil';
 @import 'components';
 @import 'auth-form';
 @import 'toaster';
@@ -25,6 +27,7 @@ body {
 }
 main {
     min-height: 80vh;
+    padding: 0 1rem;
 }
 
 h1, h2, h3, h4, h5 { font-weight: 700; }
@@ -39,7 +42,7 @@ h2 {font-size: 5rem;}
 
 h3 {font-size: 3.7rem;}
 
-p {font-size: 1.3rem;}
+p {font-size: 1.8rem;}
 
 
 

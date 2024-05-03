@@ -9,7 +9,7 @@ class User {
             if (err) reject(err);
             try {
                const [result] = await pool.execute("INSERT INTO user (email, password, created_at) VALUES (?, ?, NOW())", [email, pass]);
-               resolve(result);
+               resolve(result[0]);
             } catch (error) {
                reject(error);
             }
@@ -35,7 +35,7 @@ class User {
       return new Promise(async (resolve, reject) => {
          try {
             const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
-            resolve(result);
+            resolve(result[0][0]);
          } catch (error) {
             reject(error);
          }
@@ -46,7 +46,7 @@ class User {
       return new Promise(async (resolve, reject) => {
             try {
                const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
-               resolve(result);
+               resolve(result[0][0]);
             } catch (error) {
                reject(error);
             }

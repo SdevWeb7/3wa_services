@@ -21,7 +21,7 @@ export const Header = () => {
                <Link className={'navlink'} to="/about">Messagerie</Link>
 
            </nav>
-            <Link className={"navlink btn btn-tertiary"} to="/auth">Mon compte</Link>
+            <Link className={"navlink btn btn-tertiary"} to="/profil">Mon compte</Link>
 
            <Link className="burger btn">
               <IconBurger onClick={handleMenu} />

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "./Header.jsx";
+import { Header } from "../components/Header.jsx";
 import { ErrorBoundary } from "../hooks/ErrorBoundary.jsx";
-import { Footer } from "./Footer.jsx";
-import Toaster from "./Toaster.jsx";
+import { Footer } from "../components/Footer.jsx";
+import Toaster from "../components/Toaster.jsx";
 
 
 export const Layout = () => {
