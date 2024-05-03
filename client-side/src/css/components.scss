@@ -1,15 +1,15 @@
-.navlink, .navlink:visited {
-  padding-bottom: .1rem;
+.navlink, .navlink:visited, a:not(.logo):not(.btn) {
   border-bottom: 1px solid transparent;
   color: var(--text);
   text-decoration: none;
   font-size: 1.6rem;
 }
-
-.navlink:hover {
+.navlink:hover, a:not(.logo):not(.btn):hover {
   border-color: var(--text);
 }
-
+a {
+  font-size: 1.6rem;
+}
 .btn {
   padding: .7rem 1.2rem;
   border: none;

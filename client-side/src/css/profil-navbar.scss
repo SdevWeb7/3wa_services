@@ -1,0 +1,17 @@
+.profil-navbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  border-right: 1px solid var(--text);
+  padding-top: 2rem;
+
+  a {
+    display: block;
+  }
+}

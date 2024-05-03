@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useAppStore } from "../../utils/store.js";
 import { Spinner } from "../../components/Spinner.jsx";
 
@@ -12,23 +12,11 @@ export const LayoutProfil = () => {
 
    else return <section className={'profil-layout'}>
 
-         <div className="navbar-profil">
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            bonjour
-            <p>bonjour</p>
-         </div>
 
-       <Outlet />
-   </section>
+
+         <article className={"profil-content"}>
+            <Outlet/>
+         </article>
+      </section>
 
 }

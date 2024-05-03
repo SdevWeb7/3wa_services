@@ -1,19 +1,12 @@
-import { useAppStore } from "../../utils/store.js";
+import { ProfilNavbar } from "./ProfilNavbar.jsx";
+
 
 export const ProfileHome = () => {
-   const addToast = useAppStore.use.addToast();
 
-   const handleLogout = async () => {
-      const response = await fetch('http://127.0.0.1:3000/api/auth/logout');
-
-      const result = await response.json();
-      if (!result.err) {
-         window.location.href = '/';
-         addToast('success', result.message);
-      } else addToast('error', result.message);
-   }
 
    return <>
+
+      <ProfilNavbar />
 
       <h1>Profile Home</h1>
 
@@ -23,12 +16,15 @@ export const ProfileHome = () => {
       <p style={{textAlign: 'center'}}>Vous pouvez ici modifier vos informations personnelles, proposer ou gérer vos
          services en cours.</p>
 
-
-      <button
-         className={"btn btn-secondary logout-btn"}
-         onClick={handleLogout}>Se déconnecter
-      </button>
-
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, dolorem sequi? Culpa deserunt dolor dolore dolorem earum facilis id in iure nobis ullam. Amet distinctio dolorem, ipsam nihil quasi tempora.</p>
    </>
 
 }
