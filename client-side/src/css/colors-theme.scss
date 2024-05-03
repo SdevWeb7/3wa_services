@@ -1,7 +1,20 @@
 :root {
-  --primary-color: #aef8c0;
+  --background : #F7FDFB;
+  --text: #04100E;
+  --primary: #4CCDB1;
+  --secondary: #A294E1;
+  --accent: #B370D7;
+  --borders: rgba(0, 0, 0, 0.2);
+  --toast-info: #c08800;
+  --toast-error: #fc6060;
+  --toast-success: #12a112;
 }
 
 [data-theme="dark"] {
-  --primary-color: #17a2b8;
+  --background: #040500;
+  --text: #FCFFF5;
+  --primary: #32B397;
+  --secondary: #2C1E6B;
+  --accent: #6B288F;
+  --borders: rgba(255, 255, 255, 0.2);
 }

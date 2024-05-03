@@ -2,8 +2,12 @@
 @import 'colors-theme.scss';
 @import 'fonts';
 @import 'header';
+@import 'menu-burger';
 @import 'components';
 @import 'auth-form';
+@import 'toaster';
+@import 'scrollbar';
+@import 'spinner';
 @import 'footer';
 
 html { font-size: 62.5%; }
@@ -12,14 +16,34 @@ html, body, * {
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--primary-color);
+    font-family: 'Inter';
+    font-weight: 400;
+    background-color: var(--background);
+    color: var(--text);
 }
+main {
+    min-height: 80vh;
+}
+
+h1, h2, h3, h4, h5 { font-weight: 700; }
+
 h1 {
     text-align: center;
-    font-size: 3.6rem;
-    font-weight: 500;
-    margin: 2rem 0;
+    font-size: 6.7rem;
+    margin: 4rem 0;
+}
+
+h2 {font-size: 5rem;}
+
+h3 {font-size: 3.7rem;}
+
+p {font-size: 1.3rem;}
+
+
+
+@media screen and (max-width: 768px) {
+    html { font-size: 50%; }
+    h1 { font-size: 3.7rem; }
 }

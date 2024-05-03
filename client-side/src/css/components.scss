@@ -1,4 +1,50 @@
-a, a:visited {
-  color: #121212;
+.navlink, .navlink:visited {
+  padding-bottom: .1rem;
+  border-bottom: 1px solid transparent;
+  color: var(--text);
   text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.navlink:hover {
+  border-color: var(--text);
+}
+
+.btn {
+  padding: .7rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--text);
+  transition: all .2s;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 3px 3px var(--borders);
+  }
+}
+.btn-primary {
+  background-color: var(--primary);
+  color: black;
+}
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--text);
+}
+.btn-tertiary {
+  background-color: var(--accent);
+  color: var(--text);
+}
+.disabled-btn {
+  cursor: not-allowed;
+  opacity: .5;
+
+  &:hover {
+    filter: none;
+    box-shadow: none;
+  }
 }

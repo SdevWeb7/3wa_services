@@ -1,5 +1,21 @@
+import { useEffect, useState } from "react";
 
 export const AuthForm = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isValid, setIsValid] = useState(false);
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+
+    useEffect(() => {
+        if (regexEmail.test(email) && password.length > 3) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
+    }, [password, email]);
+
+
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -34,25 +50,37 @@ export const AuthForm = () => {
          }
     }
 
-   return <>
+
+   return <main className={'main'}>
        <h1>Authentification</h1>
 
-       <button onClick={handleLogout}>Se déconnecter</button>
+       <button
+          className={"btn btn-secondary logout-btn"}
+          onClick={handleLogout}>Se déconnecter</button>
 
        <form className={"auth-form"} onSubmit={handleForm}>
-           <label htmlFor={"email"}>Votre e-mail</label>
+           <label className={'label'} htmlFor={"email"}>Votre e-mail</label>
            <input
-              type="text"
+              className={'input'}
+              type="email"
               name={'email'}
               id={"email"}
-              placeholder={"Votre e-mail"} />
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder={"Votre e-mail"}/>
+           {!regexEmail.test(email) && <span>Exemple : test@test.fr</span>}
 
-           <label htmlFor="password">Votre mot de passe</label>
+
+           <label className={'label'} htmlFor="password">Votre mot de passe</label>
            <input
+              className={"input"}
               type="password"
               name={'password'}
               id={"password"}
-              placeholder={'Votre mot de passe'} />
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder={'Votre mot de passe'}/>
+           {password.length < 4 && <span>Au moins 4 caractères</span>}
 
 
            <div className="radios">
@@ -62,9 +90,9 @@ export const AuthForm = () => {
                   name={"action"}
                   value={'login'}
                   defaultChecked={true}
-                  id={'login'} />
+                  id={'login'}/>
 
-               <label htmlFor="subscribe">S'inscrire</label>
+               <label htmlFor="subscribe">S&apos;inscrire</label>
                <input
                   type="radio"
                   name={"action"}
@@ -72,8 +100,11 @@ export const AuthForm = () => {
                   id={'subscribe'}/>
            </div>
 
-           <input type="submit"value={"Valider"}/>
+           <button
+              className={`btn btn-tertiary ${isValid ? '' : 'disabled-btn'}`}
+              type="submit"
+              disabled={! isValid}>Valider</button>
        </form>
-   </>
+   </main>
 
 }

@@ -10,7 +10,10 @@ import cors from 'cors';
 const app = express();
 const PORT = 3000;
 
-app.use(cors())
+app.use(cors({
+   origin: 'http://localhost:5173',
+   credentials: true
+}))
 
 app.use(favicon(path.join(process.cwd(), 'public', 'favicon.ico')));
 app.use(express.static(path.join(process.cwd(), 'public')));
@@ -28,8 +31,8 @@ app.use(session({
 //Middlewares custom
 app.use(securityMiddleware);
 
-
 app.use(router);
+
 
 
 app.listen(PORT, () => {

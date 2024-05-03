@@ -1,16 +1,18 @@
 footer {
-  background-color: lightgray;
-  margin: 2rem 0 0 0;
+  margin: 4rem 0 0 0;
   padding: 2rem 1rem;
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -2px 4px var(--borders);
 
   .theme {
-    display: inline;
-    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
   }
+
   .copyright {
     margin-top: 2rem;
   }

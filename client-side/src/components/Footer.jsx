@@ -1,4 +1,6 @@
 import { useTheme } from "../hooks/useTheme.jsx";
+import { IconMoon } from "../svg/IconMoon.jsx";
+import { IconSun } from "../svg/IconSun.jsx";
 
 export const Footer = () => {
 
@@ -8,11 +10,15 @@ export const Footer = () => {
 
        <footer className={'footer'}>
 
-          <p className={'theme'}>Thème actuel : {theme}</p>
-          <button
-             onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>Changer de thème</button>
+          <aside className={'theme'}>
+             <button
+                className={'btn btn-primary'}
+                onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>Thème {theme === 'dark' ? 'Clair' : "Sombre"}</button>
+             {theme === 'dark' ? <IconMoon /> : <IconSun />}
+          </aside>
 
-          <p className={'copyright'}>Steven pour le diplôme de la 3W Academy - © 2024 - Tous droits réservés</p>
+          <p className={'copyright'}>Steven pour le diplôme de la 3W Academy</p>
+          <p>© 2024 - Tous droits réservés</p>
 
        </footer>
    </>
