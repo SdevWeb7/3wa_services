@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 export const AuthForm = () => {
+    const navigation = useNavigation();
+    const addToast = useAppStore.use.addToast();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isValid, setIsValid] = useState(false);
@@ -37,7 +39,10 @@ export const AuthForm = () => {
         const result = await response.json();
 
         if (!result.err) {
-            window.location = '/';
+            navigation('/')
+            addToast('success', result.message);
+        } else {
+            addToast('error', result.message);
         }
     }
 
@@ -46,7 +51,10 @@ export const AuthForm = () => {
 
          const result = await response.json();
          if (!result.err) {
-             window.location = '/';
+             navigation('/')
+             addToast('success', result.message);
+         } else {
+             addToast('error', result.message);
          }
     }
 
