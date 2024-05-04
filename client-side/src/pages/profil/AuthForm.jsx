@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "../../components/Spinner.jsx";
 import { useAppStore } from "../../utils/store.js";
+import { useNavigate } from "react-router-dom";
 
 export const AuthForm = () => {
+    const navigation = useNavigate();
     const user = useAppStore.use.user();
     const addToast = useAppStore.use.addToast();
     const [email, setEmail] = useState('');
@@ -35,7 +37,7 @@ export const AuthForm = () => {
         const result = await response.json();
 
         if (!result.err) {
-            window.location.href = '/';
+            navigation('/');
             addToast('success', result.message);
         } else addToast('error', result.message);
     }

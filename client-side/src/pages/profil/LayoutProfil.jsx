@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useAppStore } from "../../utils/store.js";
 import { Spinner } from "../../components/Spinner.jsx";
 
@@ -17,6 +17,7 @@ export const LayoutProfil = () => {
          <article className={"profil-content"}>
             <Outlet/>
          </article>
-      </section>
 
+
+      </section>
 }

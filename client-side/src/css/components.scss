@@ -39,6 +39,10 @@ a {
   background-color: var(--accent);
   color: var(--text);
 }
+.btn-danger {
+  background-color: var(--danger);
+  color: whitesmoke;
+}
 .disabled-btn {
   cursor: not-allowed;
   opacity: .5;

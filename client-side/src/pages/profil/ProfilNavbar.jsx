@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppStore } from "../../utils/store.js";
 
 export const ProfilNavbar = () => {
+    const navigation = useNavigate();
     const addToast = useAppStore.use.addToast();
 
     const handleLogout = async () => {
@@ -9,7 +10,7 @@ export const ProfilNavbar = () => {
 
         const result = await response.json();
         if (!result.err) {
-            window.location.href = '/';
+            navigation('/');
             addToast('success', result.message);
         } else addToast('error', result.message);
     }
