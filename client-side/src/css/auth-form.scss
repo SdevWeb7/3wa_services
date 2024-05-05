@@ -37,8 +37,14 @@
       margin-right: .5rem;
     }
   }
+  .btn {
+    margin-top: 2rem;
+  }
 }
-
+.delete-btn {
+  display: block;
+  margin: 4rem auto 2rem auto;
+}
 .logout-btn {
   display: block;
   margin: 2rem auto 2rem auto;

@@ -10,6 +10,7 @@
 @import 'toaster';
 @import 'scrollbar';
 @import 'spinner';
+@import 'delete-user-modal';
 @import 'footer';
 
 html { font-size: 62.5%; }
@@ -24,6 +25,9 @@ body {
     font-weight: 400;
     background-color: var(--background);
     color: var(--text);
+}
+.main {
+    min-height: 79vh;
 }
 
 h1, h2, h3, h4, h5 { font-weight: 700; }

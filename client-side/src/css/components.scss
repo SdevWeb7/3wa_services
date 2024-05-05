@@ -10,6 +10,9 @@
 a {
   font-size: 1.6rem;
 }
+.warning {
+  color: var(--danger);
+}
 .btn {
   padding: .7rem 1.2rem;
   border: none;
@@ -42,6 +45,10 @@ a {
 .btn-danger {
   background-color: var(--danger);
   color: whitesmoke;
+}
+.btn-success {
+    background-color: var(--success);
+    color: whitesmoke;
 }
 .disabled-btn {
   cursor: not-allowed;

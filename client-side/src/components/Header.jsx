@@ -8,8 +8,7 @@ export const Header = () => {
    const user = useAppStore.use.user();
    const [isOpenMenu, setIsOpenMenu] = useState(false);
 
-   const handleMenu = (e) => {
-      e.preventDefault();
+   const handleMenu = () => {
       setIsOpenMenu(v => !v);
    }
 
@@ -26,7 +25,7 @@ export const Header = () => {
            </nav>
             <Link className={"navlink btn btn-tertiary"} to="/profil">Mon compte</Link>
 
-           <Link className="burger btn" onClick={e => handleMenu(e)}>
+           <Link className="burger btn" onClick={handleMenu}>
               <IconBurger />
            </Link>
 

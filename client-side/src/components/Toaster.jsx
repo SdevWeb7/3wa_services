@@ -29,7 +29,7 @@ export function Toaster () {
 
                <IconClose onClick={() => setToasts([])} />
 
-               {toasts.map(({type, message}) => <p key={message} className={findClassByType(type)}>{message}</p>)}
+               {toasts.map(({type, message}) => <p key={Math.floor(Math.random()*100000)} className={findClassByType(type)}>{message}</p>)}
 
            </div>}
     </>

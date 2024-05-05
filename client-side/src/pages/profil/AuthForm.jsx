@@ -39,7 +39,9 @@ export const AuthForm = () => {
         if (!result.err) {
             navigation('/');
             addToast('success', result.message);
-        } else addToast('error', result.message);
+        } else {
+            addToast('error', result.message);
+        }
     }
 
 
