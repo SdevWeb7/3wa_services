@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { useAppStore } from "../../utils/store.js";
 import { Spinner } from "../../components/Spinner.jsx";
+import { ProfilNavbar } from "./ProfilNavbar.jsx";
+import { useContext } from "react";
+import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 export const LayoutProfil = () => {
-   const user = useAppStore.use.user();
+   const { user } = useContext(myContext);
 
    if (!user) return <Spinner />
 
@@ -12,6 +14,7 @@ export const LayoutProfil = () => {
 
    else return <section className={'profil-layout'}>
 
+         <ProfilNavbar/>
 
 
          <article className={"profil-content"}>

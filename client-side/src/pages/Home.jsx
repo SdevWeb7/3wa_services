@@ -1,9 +1,11 @@
 import { useAppStore } from "../utils/store.js";
+import { useContext } from "react";
+import { myContext } from "../hooks/MyContextProvider.jsx";
 
 
 export const Home = () => {
 
-    const user = useAppStore.use.user();
+    const { user } = useContext(myContext);
     const addToast = useAppStore.use.addToast();
 
     console.log(user)

@@ -10,10 +10,6 @@ const createSelectors = (_store) => {
 }
 
 export const useAppStore = createSelectors(create((set) => ({
-   user: null,
-   updateUser(user) {
-      set({user: user});
-   },
    toasts: [],
    setToasts(toasts) {
       set({toasts: toasts});

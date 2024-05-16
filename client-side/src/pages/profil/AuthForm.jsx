@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Spinner } from "../../components/Spinner.jsx";
 import { useAppStore } from "../../utils/store.js";
 import { useNavigate } from "react-router-dom";
+import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 export const AuthForm = () => {
     const navigation = useNavigate();
-    const user = useAppStore.use.user();
+    const { user } = useContext(myContext);
     const addToast = useAppStore.use.addToast();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

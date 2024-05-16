@@ -1,25 +1,25 @@
 
-@import 'colors-theme.scss';
-@import 'fonts';
-@import 'header';
-@import 'menu-burger';
-@import 'profil-layout';
-@import 'profil-navbar';
-@import 'components';
-@import 'auth-form';
-@import 'toaster';
-@import 'scrollbar';
-@import 'spinner';
-@import 'delete-user-modal';
-@import 'footer';
+@import 'utils/colors-theme.scss';
+@import 'utils/mixins';
+@import 'utils/functions';
+@import 'utils/fonts';
+@import 'header/header';
+@import 'header/menu-burger';
+@import 'profil/profil-layout';
+@import 'utils/components';
+@import 'profil/auth-form';
+@import 'utils/toaster';
+@import 'utils/scrollbar';
+@import 'utils/spinner';
+@import 'profil/delete-user-modal';
+@import 'footer/footer';
 
-html { font-size: 62.5%; }
+html { font-size: 50%; }
 html, body, * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Inter';
     font-weight: 400;
@@ -33,8 +33,8 @@ body {
 h1, h2, h3, h4, h5 { font-weight: 700; }
 
 h1 {
+    font-size: 3.7rem;
     text-align: center;
-    font-size: 6.7rem;
     margin: 4rem 0;
 }
 
@@ -46,7 +46,7 @@ p {font-size: 1.8rem;}
 
 
 
-@media screen and (max-width: 768px) {
-    html { font-size: 50%; }
-    h1 { font-size: 3.7rem; }
+@media screen and (min-width: 768px) {
+    html { font-size: 62.5%; }
+    h1 { font-size: 6.7rem; }
 }

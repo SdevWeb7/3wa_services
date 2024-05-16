@@ -1,10 +1,11 @@
-import { useTheme } from "../hooks/useTheme.jsx";
 import { IconMoon } from "../svg/IconMoon.jsx";
 import { IconSun } from "../svg/IconSun.jsx";
+import { useContext } from "react";
+import { myContext } from "../hooks/MyContextProvider.jsx";
 
 export const Footer = () => {
 
-   const { theme, setTheme } = useTheme();
+   const { theme, setTheme } = useContext(myContext);
 
    return <>
 

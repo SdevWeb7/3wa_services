@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { IconClose } from "../svg/IconClose.jsx";
-import { useAppStore } from "../utils/store.js";
+import { useContext } from "react";
+import { myContext } from "../hooks/MyContextProvider.jsx";
 
 export const MenuBurger = ({handleMenu}) => {
-   const user = useAppStore.use.user();
+   const { user } = useContext(myContext);
 
 
    return createPortal(<nav className={'menu-burger'}>

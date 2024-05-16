@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { IconBurger } from "../svg/IconBurger.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MenuBurger } from "./MenuBurger.jsx";
-import { useAppStore } from "../utils/store.js";
+import { myContext } from "../hooks/MyContextProvider.jsx";
 
 export const Header = () => {
-   const user = useAppStore.use.user();
+   const { user } = useContext(myContext);
    const [isOpenMenu, setIsOpenMenu] = useState(false);
 
    const handleMenu = () => {
@@ -20,10 +20,9 @@ export const Header = () => {
            <nav className={'navbar'}>
                <Link className={'navlink'} to="/about">Services</Link>
 
-              {user && Object.keys(user).length > 0 && <Link className={'navlink'} to="/about">Messagerie</Link>}
 
            </nav>
-            <Link className={"navlink btn btn-tertiary"} to="/profil">Mon compte</Link>
+            <Link className={"navlink btn btn-tertiary"} to="/profil">Profil</Link>
 
            <Link className="burger btn" onClick={handleMenu}>
               <IconBurger />
