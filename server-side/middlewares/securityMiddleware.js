@@ -5,7 +5,7 @@ export const securityMiddleware = (req, res, next) => {
 
    let protectedPath = ['/admin'];
 
-   if(!req.session?.isLogged && protectedPath.indexOf(pathname) !== -1 ){
+   if(!req.session?.user && protectedPath.indexOf(pathname) !== -1 ){
       res.redirect('/');
    }
    else{

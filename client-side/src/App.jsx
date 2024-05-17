@@ -13,7 +13,12 @@ function App() {
    const {setUser} = useContext(myContext)
 
    useEffect(() => {
-      fetch('http://127.0.0.1:3000/api/me')
+      fetch('http://localhost:3000/api/me', {
+         headers: {
+            'Accept': 'application/json'
+         },
+         credentials: 'include'
+      })
             .then(r => r.json())
             .then(d => setUser(d))
    }, [])
@@ -34,7 +39,7 @@ function App() {
                <Route path={'about'} element={<About />} />
 
 
-               <Route path={'*'} element={<h1>404</h1>} />
+               <Route path={'*'} element={<h1>404 Not Found :(</h1>} />
             </Route>
 
          </Routes>

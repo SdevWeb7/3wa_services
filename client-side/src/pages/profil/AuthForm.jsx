@@ -26,8 +26,9 @@ export const AuthForm = () => {
         const data = new FormData(e.target);
         const action = data.get('action') === "subscribe" ? 'subscribe' : 'login';
 
-        const response = await fetch(`http://127.0.0.1:3000/api/auth/${action}`, {
+        const response = await fetch(`http://localhost:3000/api/auth/${action}`, {
             method: 'POST',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: data.get('email'),

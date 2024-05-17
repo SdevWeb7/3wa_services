@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { compareSync } from "bcrypt";
 
 
 export const subscribe = async (req, res) => {
@@ -8,22 +9,21 @@ export const subscribe = async (req, res) => {
             const result = await User.findByEmail(email);
 
             if (result) {
-                  res.json({ message: 'Ce nom d\'utilisateur est déjà pris' });
+                  //on ne veut pas donner d'informations sur l'existence ou non de l'utilisateur
+                  res.json({ message: 'Problème interne', err: 'Problème interne' });
             } else {
                   try {
                         const result2 = await User.create(email, password);
-                        req.session.isLogged = true;
-
                         const result3 = await User.findById(result2.insertId);
                         req.session.user = result3;
                         res.json({message: 'Votre compte a bien été créé'});
                   } catch (err) {
-                        res.json({message: 'Une erreur est survenue lors de la création du compte.', err});
+                        res.json({message: 'Une erreur est survenue lors de la création du compte.', err: err.message});
                   }
             }
 
       } catch(err) {
-            res.json({ message: 'Une erreur est survenue.', err });
+            res.json({ message: 'Une erreur est survenue.', err: err.message });
       }
 
 }
@@ -33,7 +33,7 @@ export const login = async (req, res) => {
 
       try {
             const result = await User.login(email, password)
-            req.session.isLogged = true;
+
             req.session.user = {
                   id: result.id,
                   email: result.email,
@@ -41,27 +41,55 @@ export const login = async (req, res) => {
                   services_rendered: result.services_rendered,
                   created_at: result.created_at
             };
-            res.json({ message: 'Vous êtes connecté' });
+            req.session.save(err => {
+                  if (err) {
+                        res.json({ message: 'Une erreur est survenue.', err: err.message });
+                  } else {
+                        res.json({ message: 'Vous êtes connecté' });
+                  }
+            });
       } catch (err) {
-            res.json({ message: 'Mauvais identifiants', err });
+            res.json({ message: 'Mauvais identifiants', err: err.message });
       }
 }
 
 export const logout = (req, res) => {
       req.session.destroy();
-      res.clearCookie('connect.sid');
+      res.clearCookie('session_id');
       res.json({ message: 'Vous êtes déconnecté' });
 }
 
-export const api_me = (req, res) => {
-      res.json({
-            id: 31,
-            email: "a@a.fr",
-            password: "aaaa",
-            sold: 1000,
-            services_rendered: 0,
-            created_at: "2024-05-03 20:57:22"
-      });
+export const deleteUser = async (req, res) => {
+      try {
+            await User.deleteUser(req.params.id)
+            req.session.destroy();
+            res.clearCookie('session_id');
+            res.json({message: 'Votre compte a bien été supprimé'});
+      } catch (err) {
+            res.json({ message: 'Une erreur est survenue.', err: err.message });
+      }
+}
 
-      // res.json(req.session.user || {});
+export const editUser = async (req, res) => {
+      try {
+            const checkUser = await User.findByIdWithPassword(req.params.id);
+            if (!checkUser) {
+                  //on ne veut pas donner d'informations sur l'existence ou non de l'utilisateur
+                  throw new Error('Problème interne');
+            }
+            const confirm = compareSync(req.body.oldPassword, checkUser.password);
+            if (!confirm) {
+                  throw new Error('Problème interne');
+            }
+
+            const editResult = await User.editUser(req.params.id, req.body.password);
+            console.log(editResult);
+            res.json({message: 'Votre compte a bien été modifié'});
+      } catch (err) {
+            res.json({ message: 'Une erreur est survenue.', err: err.message});
+      }
+}
+
+export const api_me = (req, res) => {
+      res.json(req.session.user || {});
 }
