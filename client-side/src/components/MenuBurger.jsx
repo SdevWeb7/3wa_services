@@ -13,10 +13,10 @@ export const MenuBurger = ({handleMenu}) => {
        <IconClose onClick={handleMenu} />
 
        <Link onClick={handleMenu} className={'navlink'} to={'/'}>Home</Link>
-       <Link onClick={handleMenu} className={'navlink'} to={'/about'}>Services</Link>
+       <Link onClick={handleMenu} className={'navlink'} to={'/services'}>Services</Link>
 
 
-      {user && Object.keys(user).length > 0 && <Link onClick={handleMenu} className={'navlink'} to={'/about'}>Messagerie</Link>}
+      {user && Object.keys(user).length > 0 && <Link onClick={handleMenu} className={'navlink'} to={'/messagerie'}>Messagerie</Link>}
 
        <Link onClick={handleMenu} className={'navlink'} to={'/profil'}>Mon Compte</Link>
 

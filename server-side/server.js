@@ -47,11 +47,7 @@ app.use(express.json());
 
 
 //Middlewares custom
-// app.use(securityMiddleware);
-app.use((req, res, next) => {
-   console.log(req.session);
-   next();
-});
+app.use(securityMiddleware);
 
 //Routes
 app.use(router);

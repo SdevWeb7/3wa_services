@@ -1,9 +1,9 @@
-export const About = () => {
+export const Messagerie = () => {
 
 
    return <>
 
-      <h1>About</h1>
+      <h1>Messagerie</h1>
 
 
       <p style={{marginTop: '5rem'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum

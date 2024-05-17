@@ -5,10 +5,9 @@ export const ProfilNavbar = () => {
    return <>
        <nav className={'profil-navbar'}>
            <Link to={'/profil'}>Profil</Link>
-           <Link to={'/profil'}>Services</Link>
-           <Link to={'/profil'}>Demandes</Link>
-           <Link to={'/profil'}>Messagerie</Link>
-
+           <Link to={'/profil/mes-services'}>Services</Link>
+           <Link to={'/profil/mes-demandes'}>Demandes</Link>
+           <Link to={'/profil/messagerie'}>Messagerie</Link>
 
        </nav>
    </>

@@ -13,7 +13,7 @@ export const Layout = () => {
 
       <main className="main">
          <ErrorBoundary
-            fallback={<h1 className={'not-found'}>
+            fallback={<h1 className={'warning'}>
                Il y a eu une erreur</h1>}>
             <Outlet/>
          </ErrorBoundary>
@@ -23,6 +23,8 @@ export const Layout = () => {
       <Footer/>
 
       <Toaster/>
+
+
    </>;
 
 }
