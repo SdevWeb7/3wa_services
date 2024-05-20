@@ -1,11 +1,12 @@
 import { pool } from "../database/config.js";
 
+
 class Service {
 
-      static async allServices () {
-         const services = await pool.execute('SELECT * FROM service');
-
-         return services[0];
+      static async allServices (perPage, offset) {
+         const totalServices = await pool.execute('SELECT COUNT(*) AS total FROM service');
+         const services = await pool.execute('SELECT * FROM service ORDER BY created_at DESC LIMIT ? OFFSET ?', [String(perPage), String(offset)]);
+         return [services[0], totalServices[0][0].total];
       }
 
       static async addService (datas) {

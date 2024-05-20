@@ -1,14 +1,21 @@
 .container-services {
-
-  border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 3rem;
 
 
-  .service {
 
-    border: 1px solid black;
+  .service {
+    padding: 1rem;
+    box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+    gap: 2rem;
+  margin: 0 auto 3rem auto;
 }

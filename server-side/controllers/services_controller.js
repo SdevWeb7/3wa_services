@@ -1,19 +1,20 @@
 import Service from "../models/Service.js";
 
+const PER_PAGE = 5;
 
 export const all_services = async (req, res) => {
+   const offset = req.query.page ? (req.query.page - 1) * PER_PAGE : 0;
+
    try {
-      const services = await Service.allServices();
-      res.json(services);
+      const [services, totalServices] = await Service.allServices(PER_PAGE, offset);
+      res.json([services, totalServices]);
 
    } catch (err) {
       return res.status(500).json({message: "Erreur interne", err: 'Erreur interne'});
    }
-
 }
 
 export const add_service = async (req, res) => {
-
    const { title, description, cost, duration, category } = req.body;
 
    if (!title || !description || !cost || !duration || !category) {
@@ -33,7 +34,6 @@ export const add_service = async (req, res) => {
 
 
 export const user_services = async (req, res) => {
-
    if (!req.session.user) {
       return res.status(401).json({message: "Non autorisé", err: 'Non autorisé'});
    }
