@@ -4,7 +4,7 @@ import 'dotenv/config';
 import session from "express-session";
 import { createRequire } from 'module';
 import { securityMiddleware } from "./middlewares/securityMiddleware.js";
-import { router } from "./router/routes.config.js";
+import router from "./router/routes.config.js";
 import favicon from 'express-favicon';
 import cors from 'cors';
 import { pool } from "./database/config.js";

@@ -82,8 +82,7 @@ export const editUser = async (req, res) => {
                   throw new Error('Problème interne');
             }
 
-            const editResult = await User.editUser(req.params.id, req.body.password);
-            console.log(editResult);
+            await User.editUser(req.params.id, req.body.password);
             res.json({message: 'Votre compte a bien été modifié'});
       } catch (err) {
             res.json({ message: 'Une erreur est survenue.', err: err.message});

@@ -5,7 +5,7 @@ import { useAppStore } from "../../utils/store.js";
 
 export const ChangePasswordForm = () => {
     const navigation = useNavigate();
-    const { user } = useContext(myContext);
+    const { user, setUser } = useContext(myContext);
     const addToast = useAppStore.use.addToast();
     const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
@@ -35,10 +35,13 @@ export const ChangePasswordForm = () => {
 
 
     const handleLogout = async () => {
-        const response = await fetch('http://localhost:3000/api/auth/logout');
+        const response = await fetch('http://localhost:3000/api/auth/logout', {
+            credentials: 'include'
+        });
 
         const result = await response.json();
         if (!result.err) {
+            setUser({});
             navigation('/');
             addToast('success', result.message);
         } else addToast('error', result.message);
@@ -50,6 +53,7 @@ export const ChangePasswordForm = () => {
 
         const response = await fetch(`http://localhost:3000/api/auth/edit/${user.id}`, {
             method: 'PATCH',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 oldPassword: data.get('oldPassword'),
@@ -68,6 +72,7 @@ export const ChangePasswordForm = () => {
     const deleteUser = async () => {
         const response = await fetch(`http://localhost:3000/api/auth/delete/${user.id}`, {
             method: 'DELETE',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
         })
 

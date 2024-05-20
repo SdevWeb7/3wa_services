@@ -16,7 +16,7 @@ function App() {
    const {setUser} = useContext(myContext)
 
    useEffect(() => {
-      fetch('http://localhost:3000/api/me', {
+      fetch('http://localhost:3000/api/auth/me', {
          headers: {
             'Accept': 'application/json'
          },

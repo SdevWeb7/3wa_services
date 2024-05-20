@@ -1,0 +1,22 @@
+import { Router } from "express";
+import { api_me, deleteUser, editUser, login, logout, subscribe } from "../controllers/auth_controller.js";
+
+
+export const router = Router();
+
+
+router.get('/me', api_me);
+
+router.post('/subscribe', subscribe);
+
+router.post('/login', login);
+
+router.delete('/delete/:id', deleteUser);
+
+router.patch('/edit/:id', editUser);
+
+router.get('/logout', logout);
+
+
+
+export default router;
