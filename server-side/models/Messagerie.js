@@ -9,7 +9,7 @@ class Messagerie {
       }
 
       static async sendMessage(fromUserId, toUserId, subject, content) {
-            const result = await pool.execute('INSERT INTO messagerie (from_user_id, to_user_id, subject, content) VALUES (?, ?, ?)', [fromUserId, toUserId, subject, content]);
+            const result = await pool.execute('INSERT INTO messagerie (from_user_id, to_user_id, subject, content, created_at) VALUES (?, ?, ?, ?, NOW())', [fromUserId, toUserId, subject, content]);
 
             return result[0];
       }
