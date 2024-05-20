@@ -51,7 +51,7 @@ export const ChangePasswordForm = () => {
 
         const data = new FormData(e.target);
 
-        const response = await fetch(`http://localhost:3000/api/auth/edit/${user.id}`, {
+        const response = await fetch(`http://localhost:3000/api/auth/edit`, {
             method: 'PATCH',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -70,7 +70,7 @@ export const ChangePasswordForm = () => {
     }
 
     const deleteUser = async () => {
-        const response = await fetch(`http://localhost:3000/api/auth/delete/${user.id}`, {
+        const response = await fetch(`http://localhost:3000/api/auth/delete`, {
             method: 'DELETE',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -78,8 +78,9 @@ export const ChangePasswordForm = () => {
 
         const result = await response.json();
         if (!result.err) {
-            navigation('/');
+            setUser({});
             addToast('success', result.message);
+            navigation('/');
         } else addToast('error', result.message);
 
     }

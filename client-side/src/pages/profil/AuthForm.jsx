@@ -6,7 +6,7 @@ import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 export const AuthForm = () => {
     const navigation = useNavigate();
-    const { user } = useContext(myContext);
+    const { user, setUser } = useContext(myContext);
     const addToast = useAppStore.use.addToast();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -39,8 +39,9 @@ export const AuthForm = () => {
         const result = await response.json();
 
         if (!result.err) {
-            navigation('/');
+            setUser(result.user);
             addToast('success', result.message);
+            navigation('/');
         } else {
             addToast('error', result.message);
         }
@@ -102,8 +103,7 @@ export const AuthForm = () => {
                 <button
                    className={`btn btn-tertiary ${isValid ? '' : 'disabled-btn'}`}
                    type="submit"
-                   disabled={! isValid}>Valider
-                </button>
+                   disabled={! isValid}>Valider</button>
             </form>
         </>;
 }

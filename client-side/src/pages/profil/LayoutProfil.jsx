@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Spinner } from "../../components/Spinner.jsx";
-import { ProfilNavbar } from "./ProfilNavbar.jsx";
+import { ProfilNavbar } from "../../components/profil/ProfilNavbar.jsx";
 import { useContext } from "react";
 import { myContext } from "../../hooks/MyContextProvider.jsx";
 

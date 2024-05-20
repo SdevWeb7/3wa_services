@@ -1,53 +1,33 @@
-export const Services = () => {
+import { useEffect, useState } from "react";
 
+export const Services = () => {
+   const [services, setServices] = useState([]);
+
+   useEffect(() => {
+      fetch('http://localhost:3000/api/services/all')
+         .then(res => res.json())
+         .then(data => setServices(data))
+         .catch(err => console.error(err));
+   }, []);
 
    return <>
 
       <h1>Tous les services</h1>
 
 
-      <p style={{marginTop: '5rem'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum
-         cumque dignissimos dolores eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente
-         voluptatibus! Amet aspernatur cumque pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut commodi, corporis cum cumque dignissimos dolores
-         eos fuga id laborum praesentium, quaerat quasi, qui repellendus sapiente voluptatibus! Amet aspernatur cumque
-         pariatur?</p>
+      <section className="container-services">
+
+
+         {services.map(service => <article
+                                       key={service.id}
+                                       className={'service'}>
+
+
+            {service.title}
+
+         </article>)}
+
+      </section>
    </>
 
 }

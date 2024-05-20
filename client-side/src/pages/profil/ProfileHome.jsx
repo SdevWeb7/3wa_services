@@ -1,4 +1,4 @@
-import { ChangePasswordForm } from "./ChangePasswordForm.jsx";
+import { ChangePasswordForm } from "../../components/profil/ChangePasswordForm.jsx";
 import { useContext } from "react";
 import { myContext } from "../../hooks/MyContextProvider.jsx";
 

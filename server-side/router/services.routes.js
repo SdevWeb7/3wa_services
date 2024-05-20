@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { add_service, all_services, handle_add_service } from "../controllers/services_controller.js";
+import { add_service, all_services, delete_service, user_services } from "../controllers/services_controller.js";
+import { securityMiddleware } from "../middlewares/securityMiddleware.js";
 
 
 export const router = Router();
@@ -7,9 +8,15 @@ export const router = Router();
 
 router.get('/all', all_services);
 
-router.get('/add', add_service);
 
-router.post('/add', handle_add_service);
+router.get('/user', securityMiddleware, user_services);
+
+
+router.post('/add', securityMiddleware, add_service);
+
+
+router.delete('/delete/:id/:userId', securityMiddleware, delete_service);
+
 
 
 

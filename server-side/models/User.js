@@ -1,109 +1,70 @@
 import { pool } from "../database/config.js";
-import { compareSync, hash } from "bcrypt";
+import { compareSync, hash, hashSync } from "bcrypt";
 
 class User {
 
-   static create(email, password) {
-      return new Promise((resolve, reject) => {
-         hash(password, 10, async (err, pass) => {
-            if (err) reject(err);
-            try {
-               const [result] = await pool.execute("INSERT INTO user (email, password, created_at) VALUES (?, ?, NOW())", [email, pass]);
-               resolve(result);
-            } catch (error) {
-               reject(error);
-            }
-         });
-      });
+   static async create(email, password) {
+      const result = await User.findByEmail(email);
+      if (result) throw new Error('Problème interne.');
+
+      const hashResult = await hashSync(password, 10);
+
+      const result2 = await pool.execute("INSERT INTO user (email, password, created_at) VALUES (?, ?, NOW())", [email, hashResult]);
+
+      const newUser = await User.findById(result2[0].insertId);
+      return newUser;
    }
 
-   static login(email, password){
-      return new Promise(async (resolve, reject) => {
-         try {
-            const result = await User.findByEmailWithPassword(email);
-            if (!result.password || !compareSync(password, result.password)) {
-               throw new Error('Mauvais identifiants');
-            }
-            resolve(result);
-         } catch (error) {
-            reject(error);
+   static async login(email, password){
+         const result = await User.findByEmailWithPassword(email);
+
+         if (!result.password || !compareSync(password, result.password)) {
+            throw new Error('Mauvais identifiants');
          }
-      });
+
+         return {
+            id: result.id,
+            email: result.email,
+            sold: result.sold,
+            services_rendered: result.services_rendered,
+            created_at: result.created_at
+         };
    }
 
-   static findById(id){
-      return new Promise(async (resolve, reject) => {
-         try {
-            const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
-            resolve(result[0][0]);
-         } catch (error) {
-            reject(error);
-         }
-      });
-   }
 
-   static findByEmail(email){
-      return new Promise(async (resolve, reject) => {
-            try {
-               const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
-               resolve(result[0][0]);
-            } catch (error) {
-               reject(error);
-            }
-         });
-   }
-
-   static findByEmailWithPassword(email){
-      return new Promise(async (resolve, reject) => {
-         try {
-            const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
-            resolve(result[0][0]);
-         } catch (error) {
-            reject(error);
-         }
-      });
-   }
-
-   static findByIdWithPassword(id){
-      return new Promise(async (resolve, reject) => {
-         try {
-            const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
-            resolve(result[0][0]);
-         } catch (error) {
-            reject(error);
-         }
-      });
-   }
-
-   static deleteUser(id){
-      return new Promise(async (resolve, reject) => {
-         try {
-            const result = await pool.execute("DELETE FROM user WHERE id = ?", [id]);
-            resolve(result);
-         } catch (error) {
-            reject(error);
-         }
-      });
+   static async deleteUser(id){
+         const result = await pool.execute("DELETE FROM user WHERE id = ?", [id]);
+         return result;
    }
 
    static editUser(id, password){
-      return new Promise(async (resolve, reject) => {
-         try {
-            hash(password, 10, async (err, pass) => {
-               if (err) reject(err);
-               try {
-                  const result = await pool.execute("UPDATE user set password = ? WHERE id = ?", [pass, id]);
-                  resolve(result);
-               } catch (error) {
-                  reject(error);
-               }
-            });
-         } catch (error) {
-            reject(error);
-         }
-      });
+         hash(password, 10, async (err, pass) => {
+            if (err) throw err;
+
+            await pool.execute("UPDATE user set password = ? WHERE id = ?", [pass, id]);
+         });
    }
 
+
+   static async findById(id){
+      const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
+      return result[0][0];
+   }
+
+   static async findByEmail(email){
+      const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
+      return result[0][0];
+   }
+
+   static async findByEmailWithPassword(email){
+      const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
+      return result[0][0];
+   }
+
+   static async findByIdWithPassword(id){
+      const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
+      return result[0][0];
+   }
 }
 
 export default User;

@@ -4,9 +4,11 @@
 @import 'utils/functions';
 @import 'utils/fonts';
 @import 'base';
+@import 'services';
 @import 'header/header';
 @import 'header/menu-burger';
 @import 'profil/profil-layout';
+@import 'profil/profil-services';
 @import 'utils/components';
 @import 'profil/auth-form';
 @import 'utils/toaster';

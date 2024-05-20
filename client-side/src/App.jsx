@@ -13,7 +13,7 @@ import { ProfileServices } from "./pages/profil/ProfileServices.jsx";
 
 
 function App() {
-   const {setUser} = useContext(myContext)
+   const {user, setUser} = useContext(myContext)
 
    useEffect(() => {
       fetch('http://localhost:3000/api/auth/me', {
@@ -25,6 +25,7 @@ function App() {
             .then(r => r.json())
             .then(d => setUser(d))
    }, [])
+
 
    return <>
       <BrowserRouter>

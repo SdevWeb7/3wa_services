@@ -16,7 +16,7 @@ export const Header = () => {
           <Link className={'logo'} to={'/'}>Community-Services</Link>
 
            <nav className={'navbar'}>
-               <Link className={'navlink'} to="/services">Services</Link>
+               <Link className={'navlink'} to="/services">Tous les services</Link>
 
 
            </nav>

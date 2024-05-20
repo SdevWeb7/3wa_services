@@ -3,7 +3,6 @@ import path from 'path';
 import 'dotenv/config';
 import session from "express-session";
 import { createRequire } from 'module';
-import { securityMiddleware } from "./middlewares/securityMiddleware.js";
 import router from "./router/routes.config.js";
 import favicon from 'express-favicon';
 import cors from 'cors';
@@ -35,10 +34,12 @@ app.use(session({
    })
 );
 
+
 app.use(cors({
    origin: 'http://localhost:5173',
    credentials: true
 }))
+
 
 app.use(favicon(path.join(process.cwd(), 'public', 'favicon.ico')));
 app.use(express.static(path.join(process.cwd(), 'public')));
@@ -46,10 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-//Middlewares custom
-app.use(securityMiddleware);
 
-//Routes
 app.use(router);
 
 
