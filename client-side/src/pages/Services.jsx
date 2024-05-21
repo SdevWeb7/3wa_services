@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { CardService } from "../components/CardService.jsx";
 
 export const Services = () => {
    const [services, setServices] = useState([]);
@@ -18,44 +19,38 @@ export const Services = () => {
    }, [page]);
 
 
-   return <>
 
-      <h1>Tous les services</h1>
-
-
-      <p style={{textAlign: 'center', marginBottom: '1rem'}}>Page {page} / {totalPages}</p>
-      <div className="pagination">
-
-         {page > 1 && <button
-            onClick={() => setPage(page - 1)}
-            className="btn btn-primary">Précédent</button>}
+      console.log(services);
 
 
-         {page < totalPages && <button
-            onClick={() => setPage(page + 1)}
-            className="btn btn-primary">Suivant</button>}
-      </div>
+      return <>
+
+         <h1>Tous les services</h1>
 
 
+         <p style={{textAlign: 'center', marginBottom: '1rem'}}>Page {page} / {totalPages}</p>
+         <div className="pagination">
 
-      <section className="container-services">
-
-
-         {services.length > 0 ? services.map(service => <article
-                                       key={service.id}
-                                       className={'service'}>
-
-
-            <p>{service.title}</p>
-
-            <p>Ajouté le : {new Date(service.created_at).toLocaleDateString()} à {new Date(service.created_at).toLocaleTimeString()}</p>
-
-         </article>) : <p>Aucun service</p>}
-
-      </section>
+            {page > 1 && <button
+               onClick={() => setPage(page - 1)}
+               className="btn btn-primary">Précédent</button>}
 
 
+            {page < totalPages && <button
+               onClick={() => setPage(page + 1)}
+               className="btn btn-primary">Suivant</button>}
+         </div>
 
-   </>
 
+         <section className="container-services">
+
+            {services && services.length > 0 ? services.map(service => {
+
+               return <CardService key={service.id} service={service} />
+            }) : <p>Aucun service pour le moment.</p>}
+
+         </section>
+
+
+      </>
 }

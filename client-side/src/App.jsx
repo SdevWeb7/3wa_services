@@ -13,7 +13,7 @@ import { ProfileServices } from "./pages/profil/ProfileServices.jsx";
 
 
 function App() {
-   const {user, setUser} = useContext(myContext)
+   const {setUser} = useContext(myContext)
 
    useEffect(() => {
       fetch('http://localhost:3000/api/auth/me', {

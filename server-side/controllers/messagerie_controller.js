@@ -1,16 +1,37 @@
-
+import Messagerie from "../models/Messagerie.js";
 
 
 export const all_messages = async (req, res) => {
-   res.json({message: "All messages"});
+   try {
+      const messages = await Messagerie.getAll(req.session.user.id)
+      res.json(messages);
+   } catch (error) {
+      res.status(500).json({message: "Erreur serveur", err: "Erreur serveur"});
+   }
 }
 
 
 export const send_message = async (req, res) => {
-   res.json({message: "Send message"});
+
+   const { toUserId, subject, content } = req.body;
+
+   try {
+      await Messagerie.sendMessage(req.session.user.id, toUserId, subject, content)
+      res.json({message: "Send message"});
+   } catch (error) {
+      res.status(500).json({message: "Erreur serveur", err: "Erreur serveur"});
+   }
 }
 
 
-export const handle_send_message = async (req, res) => {
-   res.json({message: "Handle Send message"});
+export const delete_message = async (req, res) => {
+   const messageId = req.params.messageId;
+
+   try {
+      await Messagerie.delete(messageId, req.session.user.id);
+      res.json({message: "Message supprimé"});
+   } catch (error) {
+      console.log(error)
+      res.status(500).json({message: "Erreur serveur", err: "Erreur serveur"});
+   }
 }

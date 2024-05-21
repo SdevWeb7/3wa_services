@@ -8,14 +8,41 @@
 
   .service {
     padding: 1rem;
-    box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 2px 3px var(--borders);
     border-radius: 2px;
+    max-width: 250px;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 2rem;
+    margin: 2rem 0 2rem 0;
+  }
+
+  span {
+    font-weight: bolder;
+  }
+
+  .service-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+
+  }
+  .footer-card p {
+    font-size: 1.4rem;
+    margin: 0;
   }
 }
 
 .pagination {
   display: flex;
   justify-content: center;
-    gap: 2rem;
+  gap: 2rem;
   margin: 0 auto 3rem auto;
 }

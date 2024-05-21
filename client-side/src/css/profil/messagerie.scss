@@ -1,0 +1,36 @@
+.container-messages {
+    margin: 5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+  .card-message {
+    background-color: var(--background);
+    width: 250px;
+    padding: 2rem 4rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--borders);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    span {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .card-buttons {
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .btn {
+      padding: 2px;
+    }
+  }
+}
