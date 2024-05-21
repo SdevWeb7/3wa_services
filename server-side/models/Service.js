@@ -23,8 +23,8 @@ class Service {
          return services;
       }
 
-      static async deleteService (id) {
-         const result = await pool.execute('DELETE FROM service WHERE id = ?', [id]);
+      static async deleteService (id, userId) {
+         const result = await pool.execute('DELETE FROM service WHERE id = ? AND user_id = ?', [id, userId]);
 
          return result[0];
       }

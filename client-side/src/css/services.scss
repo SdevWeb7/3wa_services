@@ -11,6 +11,7 @@
     box-shadow: 0 0 2px 3px var(--borders);
     border-radius: 2px;
     max-width: 250px;
+    word-break: break-word;
   }
 
   p:not(:last-child) {
@@ -37,6 +38,11 @@
   .footer-card p {
     font-size: 1.4rem;
     margin: 0;
+  }
+
+  .input-date {
+    display: block;
+    margin: 0 auto 2rem auto;
   }
 }
 

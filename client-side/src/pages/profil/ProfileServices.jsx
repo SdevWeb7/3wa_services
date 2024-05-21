@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AddServiceForm } from "../../components/profil/AddServiceForm.jsx";
 import { IconTrash } from "../../svg/IconTrash.jsx";
 import { useAppStore } from "../../utils/store.js";
-import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 
 export const ProfileServices = () => {
-   const {user} = useContext(myContext)
    const addToast = useAppStore.use.addToast();
    const [services, setServices] = useState([]);
    const [addFormIsOpen, setAddFormIsOpen] = useState(false);
@@ -22,7 +20,8 @@ export const ProfileServices = () => {
 
 
    const deleteService = async (id) => {
-      const response = await fetch(`http://localhost:3000/api/services/delete/${id}/${user.id}`, {
+      if (confirm('Voulez-vous vraiment supprimer ce service ?') === false) return;
+      const response = await fetch(`http://localhost:3000/api/services/delete/${id}`, {
          method: 'DELETE',
          credentials: 'include'
       });

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { CardService } from "../components/CardService.jsx";
+import { useAppStore } from "../utils/store.js";
 
 export const Services = () => {
+   const addToast = useAppStore.use.addToast();
    const [services, setServices] = useState([]);
    const [page, setPage] = useState(1);
    const [totalServices, setTotalServices] = useState(0);
@@ -17,10 +19,6 @@ export const Services = () => {
          })
          .catch(err => console.error(err));
    }, [page]);
-
-
-
-      console.log(services);
 
 
       return <>

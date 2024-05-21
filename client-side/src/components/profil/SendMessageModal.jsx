@@ -10,6 +10,8 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
       content: '',
       toUserId: toUserId
    });
+   const isValidSubject = formDatas.subject.length > 5;
+   const isValidContent = formDatas.subject.length > 5;
 
 
    const onInputChange = (e) => {
@@ -20,6 +22,10 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
    }
 
    const handleSendMessage = async () => {
+      if (!isValidSubject || !isValidContent) {
+         addToast('error','Veuillez remplir correctement les champs');
+         return;
+      }
       try {
          const response = await fetch(`http://localhost:3000/api/messagerie/send`, {
             method: 'POST',

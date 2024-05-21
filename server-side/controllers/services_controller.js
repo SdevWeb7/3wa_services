@@ -29,7 +29,9 @@ export const add_service = async (req, res) => {
       return res.status(500).json({message: "Erreur interne", err: 'Erreur interne'});
    }
 
-   res.json({message: "Le service a bien été ajouté", service: { id: result.insertId, title, description, cost, duration, category }});
+   res.json({
+      message: "Le service a bien été ajouté",
+      service: { id: result.insertId, title, description, cost, duration, category }});
 }
 
 
@@ -43,19 +45,14 @@ export const user_services = async (req, res) => {
    } catch (err) {
       return res.status(500).json({message: "Erreur interne", err: 'Erreur interne'});
    }
-
 }
 
 
 export const delete_service = async (req, res) => {
-   if (!req.session.user || (req.session.user.id !== Number(req.params.userId))) {
-      return res.status(401).json({message: "Non autorisé", err: 'Non autorisé'});
-   }
    try {
-      await Service.deleteService(req.params.id);
+      await Service.deleteService(req.params.id, req.session.user.id);
       res.json({message: "Le service a bien été supprimé"});
    } catch (err) {
       return res.status(500).json({message: "Erreur interne", err: 'Erreur interne'});
    }
-
 }

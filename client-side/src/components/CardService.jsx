@@ -1,5 +1,5 @@
 import { SendMessageModal } from "./profil/SendMessageModal.jsx";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { myContext } from "../hooks/MyContextProvider.jsx";
 import { useAppStore } from "../utils/store.js";
 
@@ -8,6 +8,7 @@ export const CardService = ({service}) => {
     const {user} = useContext(myContext);
     const [sendMessageModalIsOpen, setSendMessageModalIsOpen] = useState(false);
     const addToast = useAppStore.use.addToast()
+    const dateRef = useRef(null);
 
 
     const handleMessageModal = () => {
@@ -17,6 +18,40 @@ export const CardService = ({service}) => {
             addToast("info", "Vous devez être connecté pour contacter un utilisateur.");
         }
     }
+
+    const handleOrder = async () => {
+        if (!user || !user.email) {
+            addToast('info', 'Vous devez être connecté pour commander un service.');
+            return;
+        }
+        if (!dateRef.current.value) {
+            addToast('info', 'Veuillez renseigner une date pour la commande.');
+            return;
+        }
+        try {
+            const response = await fetch(`http://localhost:3000/api/commandes/add/${service.id}/${service.user_id}`, {
+                method: 'POST',
+                credentials: 'include',
+                  headers: {
+                     'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                     date: new Date(dateRef.current.value)
+                  })
+            })
+            const data = await response.json();
+
+            if (data.err) {
+                addToast('error', 'Il y a eu une erreur lors de la commande. Veuillez réessayer.');
+            } else {
+                addToast('success', 'Commande effectuée avec succès !');
+            }
+        } catch (error) {
+            addToast('error', 'Il y a eu une erreur lors de la commande. Veuillez réessayer.');
+        }
+    }
+
+    console.log(service)
 
    return <>
        <article
@@ -33,13 +68,17 @@ export const CardService = ({service}) => {
 
 
            <div className="service-buttons">
-               <button className="btn btn-primary">Commander</button>
+               <button
+                  onClick={handleOrder}
+                  className="btn btn-primary">Commander
+               </button>
 
                <button
                   onClick={handleMessageModal}
                   className="btn btn-secondary">Contacter
                </button>
            </div>
+           <input className={'input-date'} ref={dateRef} type="datetime-local"/>
 
 
            <div className="footer-card">
@@ -53,8 +92,8 @@ export const CardService = ({service}) => {
 
 
            {sendMessageModalIsOpen && <SendMessageModal
-                                          setIsOpen={setSendMessageModalIsOpen}
-                                          toUserId={service.user_id} />}
+              setIsOpen={setSendMessageModalIsOpen}
+              toUserId={service.user_id}/>}
 
 
        </article>
