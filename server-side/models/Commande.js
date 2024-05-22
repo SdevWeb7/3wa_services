@@ -18,13 +18,13 @@ export class Commande {
    }
 
 
-   // static async finaliser(commandeId) {
-   //
-   //    await pool.execute('UPDATE transaction_status SET status = "Finalisée" WHERE id = ?', [commandeId]);
-   // }
-   //
-   // static async delete(commandeId) {
-   //
-   //    await pool.execute('DELETE FROM transaction_status WHERE id = ?', [commandeId]);
-   // }
+   static async finaliser(commandeId, toUserId) {
+
+      await pool.execute('UPDATE transaction_status SET status = "Finalisée" WHERE id = ? AND to_user_id = ?', [commandeId, toUserId]);
+   }
+
+   static async delete(commandeId, userId) {
+
+      await pool.execute('DELETE FROM transaction_status WHERE id = ? AND (to_user_id = ? OR from_user_id = ?)', [commandeId, userId, userId]);
+   }
 }

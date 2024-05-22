@@ -1,41 +1,59 @@
 import { IconTrash } from "../../svg/IconTrash.jsx";
+import { useAppStore } from "../../utils/store.js";
 
-export const CardCommande = ({commande, finalisable = true}) => {
+export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
+   const addToast = useAppStore.use.addToast();
 
+   const handleDelete = async () => {
+      try {
+         const response = await fetch(`http://localhost:3000/api/commandes/delete/${commande.id}}}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+               'Content-Type': 'application/json',
+            }
+         });
+         const data = await response.json();
+         if (data.err) {
+            addToast('error', 'Il y a eu un problème.');
+         } else {
+            addToast('success', data.message);
+            setCommandes((commandes) => commandes.filter((c) => c.id !== commande.id));
+         }
+      } catch (error) {
+         addToast('error', 'Il y a eu un problème.');
+      }
 
-   // const handleDelete = () => {
-   //    fetch('http://localhost:3000/api/commandes/delete', {
-   //       method: 'POST',
-   //       credentials: 'include',
-   //       headers: {
-   //          'Content-Type': 'application/json',
-   //       },
-   //       body: JSON.stringify({commandeId: commande.id})
-   //    }).then(response => response.json())
-   //       .then(data => {
-   //          console.log(data);
-   //       })
-   //       .catch(error => {
-   //          console.error(error);
-   //       });
-   // }
-   //
-   // const handleFinaliser = () => {
-   //    fetch('http://localhost:3000/api/commandes/finaliser', {
-   //       method: 'POST',
-   //       credentials: 'include',
-   //       headers: {
-   //          'Content-Type': 'application/json',
-   //       },
-   //       body: JSON.stringify({commandeId: commande.id})
-   //    }).then(response => response.json())
-   //       .then(data => {
-   //          console.log(data);
-   //       })
-   //       .catch(error => {
-   //          console.error(error);
-   //       });
-   // }
+   }
+
+   const handleFinaliser = async () => {
+      try {
+         const response = await fetch(`http://localhost:3000/api/commandes/finaliser/${commande.id}}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+               'Content-Type': 'application/json',
+            }
+         });
+         const data = await response.json();
+
+         if (data.err) {
+            addToast('error', 'Il y a eu un problème.');
+         } else {
+            addToast('success', data.message);
+            setCommandes((commandes) => commandes.map((c) => {
+               if (c.id === commande.id) {
+                  return {...c, status: 'Finalisée'};
+               }
+               return c;
+
+            }));
+         }
+      } catch (error) {
+         addToast('error', 'Il y a eu un problème.');
+      }
+
+   }
 
    return <article className={'card-commande'}>
 
@@ -51,11 +69,11 @@ export const CardCommande = ({commande, finalisable = true}) => {
 
       <div className={'commande-actions'}>
          {finalisable && <button
-                              // onClick={handleFinaliser}
+                              onClick={handleFinaliser}
                               className={'btn btn-secondary'}>Finaliser</button>}
 
          <button
-            // onClick={handleDelete}
+            onClick={handleDelete}
             className="btn btn-danger"><IconTrash /></button>
       </div>
    </article>

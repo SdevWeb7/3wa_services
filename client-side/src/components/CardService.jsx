@@ -51,7 +51,6 @@ export const CardService = ({service}) => {
         }
     }
 
-    console.log(service)
 
    return <>
        <article

@@ -20,20 +20,20 @@ export const all_commandes = async (req, res) => {
 }
 
 
-// export const finaliser_commande = async (req, res) => {
-//       try {
-//          await Commande.finaliser(req.params.commandeId);
-//          res.status(200).json({ message: "Commande finalisée." });
-//       } catch (error) {
-//          res.status(500).json({ message: error.message, err: 'Il y a eu un problème.' });
-//       }
-// }
-//
-// export const delete_commande = async (req, res) => {
-//       try {
-//          await Commande.delete(req.params.commandeId);
-//          res.status(200).json({ message: "Commande supprimée." });
-//       } catch (error) {
-//          res.status(500).json({ message: error.message, err: 'Il y a eu un problème.' });
-//       }
-// }
+export const finaliser_commande = async (req, res) => {
+      try {
+         await Commande.finaliser(req.params.commandeId, req.session.user.id);
+         res.status(200).json({ message: "Commande finalisée." });
+      } catch (error) {
+         res.status(500).json({ message: error.message, err: 'Il y a eu un problème.' });
+      }
+}
+
+export const delete_commande = async (req, res) => {
+      try {
+         await Commande.delete(req.params.commandeId, req.session.user.id);
+         res.status(200).json({ message: "Commande supprimée." });
+      } catch (error) {
+         res.status(500).json({ message: error.message, err: 'Il y a eu un problème.' });
+      }
+}

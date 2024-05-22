@@ -36,7 +36,7 @@ export const ProfileDemandes = () => {
       <h2>Commandes reçues</h2>
 
       <section className="container-commandes">
-         {commandesRecues.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} />)}
+         {commandesRecues.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} setCommandes={setCommandesRecues} />)}
       </section>
 
 
@@ -45,7 +45,7 @@ export const ProfileDemandes = () => {
       <h2 style={{marginTop: "80px"}}>Commandes passées</h2>
 
       <section className="container-commandes">
-         {commandesPasses.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} finalisable={false} />)}
+         {commandesPasses.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} finalisable={false} setCommandes={setCommandesPasses} />)}
       </section>
 
    </>;
