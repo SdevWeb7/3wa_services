@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardService } from "../components/CardService.jsx";
-import { useAppStore } from "../utils/store.js";
 
 export const Services = () => {
-   const addToast = useAppStore.use.addToast();
    const [services, setServices] = useState([]);
    const [page, setPage] = useState(1);
    const [totalServices, setTotalServices] = useState(0);
@@ -11,7 +9,13 @@ export const Services = () => {
    const totalPages = Math.ceil(totalServices / PER_PAGE);
 
    useEffect(() => {
-      fetch(`http://localhost:3000/api/services/all?page=${page}`)
+      fetch(`http://localhost:3000/api/services/all?page=${page}`, {
+         method: 'GET',
+         headers: {
+            'Accept': 'application/json',
+         },
+         credentials: 'include'
+      })
          .then(res => res.json())
          .then(data => {
             setServices(data[0])
