@@ -7,7 +7,6 @@ export const Home = () => {
 
     const { user } = useContext(myContext);
 
-    console.log(user)
 
     return <main className={'main'}>
 

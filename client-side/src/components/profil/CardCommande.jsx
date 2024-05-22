@@ -28,12 +28,16 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
    const handleFinaliser = async () => {
       try {
-         const response = await fetch(`http://localhost:3000/api/commandes/finaliser/${commande.id}}`, {
+         const response = await fetch(`http://localhost:3000/api/commandes/finaliser/${commande.id}`, {
             method: 'PATCH',
             credentials: 'include',
             headers: {
                'Content-Type': 'application/json',
-            }
+            },
+            body: JSON.stringify({
+               cost: commande.cost,
+               fromUserId: commande.from_user_id,
+            })
          });
          const data = await response.json();
 
@@ -55,6 +59,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
    }
 
+
    return <article className={'card-commande'}>
 
       <h3>{commande.title}</h3>
@@ -68,7 +73,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
 
       <div className={'commande-actions'}>
-         {finalisable && <button
+         {finalisable && commande.status !== "Finalisée" && <button
                               onClick={handleFinaliser}
                               className={'btn btn-secondary'}>Finaliser</button>}
 
