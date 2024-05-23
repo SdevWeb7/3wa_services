@@ -9,7 +9,7 @@ export const Services = () => {
    const totalPages = Math.ceil(totalServices / PER_PAGE);
 
    useEffect(() => {
-      fetch(`http://localhost:3000/api/services/all?page=${page}`, {
+      fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/services/all?page=${page}`, {
          method: 'GET',
          headers: {
             'Accept': 'application/json',

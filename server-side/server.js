@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 const mySQLStore = require('express-mysql-session')(session);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT_BACKEND;
 
 app.use(session({
       name: 'session_id',
@@ -36,7 +36,7 @@ app.use(session({
 
 
 app.use(cors({
-   origin: 'http://localhost:5173',
+   origin: process.env.URL_SERVER_FRONT,
    credentials: true
 }))
 

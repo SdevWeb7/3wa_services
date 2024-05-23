@@ -6,7 +6,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
    const handleDelete = async () => {
       try {
-         const response = await fetch(`http://localhost:3000/api/commandes/delete/${commande.id}}}`, {
+         const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/delete/${commande.id}`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {
@@ -28,7 +28,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
    const handleFinaliser = async () => {
       try {
-         const response = await fetch(`http://localhost:3000/api/commandes/finaliser/${commande.id}`, {
+         const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/finaliser/${commande.id}`, {
             method: 'PATCH',
             credentials: 'include',
             headers: {

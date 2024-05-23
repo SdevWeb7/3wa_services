@@ -6,7 +6,7 @@ export const Messagerie = () => {
 
 
    useEffect(() => {
-      fetch('http://localhost:3000/api/messagerie/all', {
+      fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/messagerie/all', {
          credentials: 'include'
       })
       .then(res => res.json())

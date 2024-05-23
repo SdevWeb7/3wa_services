@@ -10,7 +10,7 @@ export const CardMessage = ({message, setMessages}) => {
 
     const deleteMessage = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/messagerie/delete/' + message.id, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/messagerie/delete/${message.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })

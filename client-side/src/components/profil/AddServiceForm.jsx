@@ -31,7 +31,7 @@ export const AddServiceForm = ({setServices}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/api/services/add', {
+        fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/services/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

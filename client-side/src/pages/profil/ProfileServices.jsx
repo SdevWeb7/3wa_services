@@ -11,7 +11,7 @@ export const ProfileServices = () => {
 
 
    useEffect(() => {
-      fetch('http://localhost:3000/api/services/user', {
+      fetch(import.meta.env.BASE_URL+'/api/services/user', {
          credentials: 'include'
       }).then(response => response.json())
         .then(result => setServices(result))
@@ -21,7 +21,7 @@ export const ProfileServices = () => {
 
    const deleteService = async (id) => {
       if (confirm('Voulez-vous vraiment supprimer ce service ?') === false) return;
-      const response = await fetch(`http://localhost:3000/api/services/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/services/delete/${id}`, {
          method: 'DELETE',
          credentials: 'include'
       });

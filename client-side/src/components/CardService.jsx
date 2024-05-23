@@ -29,7 +29,7 @@ export const CardService = ({service}) => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:3000/api/commandes/add/${service.id}/${service.user_id}`, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/add/${service.id}/${service.user_id}`, {
                 method: 'POST',
                 credentials: 'include',
                   headers: {

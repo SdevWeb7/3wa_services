@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
    destination: function (req, file, cb) {
       const newDirectory = path.join(
          process.cwd(),
-         "public/img/id_" + req.body.title
+         "public/img/" + file.originalname
       );
       fs.mkdirSync(newDirectory, { recursive: true });
       cb(null, newDirectory);
@@ -23,7 +23,7 @@ export const upload = multer({
       fileSize: 5 * 1024 * 1024,
    },
    fileFilter: function (req, file, cb) {
-      const filetypes = /png|jpg|jpeg/;
+      const filetypes = /png|jpg|jpeg|webp/;
       const isExtnameValid = filetypes.test(
          path.extname(file.originalname).toLowerCase()
       );
@@ -33,7 +33,7 @@ export const upload = multer({
       if (isMimetypeValid && isExtnameValid) {
          return cb(null, true);
       } else {
-         cb("Images en png, jpg ou jpeg uniquement");
+         cb("Image en png, jpg, jpeg ou webp uniquement et maximum 5Mo");
       }
    },
-}).array("images", 10);
+}).single("image");

@@ -11,7 +11,7 @@ export const ProfileDemandes = () => {
 
 
    useEffect(() => {
-      fetch('http://localhost:3000/api/commandes/all', {
+      fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/commandes/all', {
          method: 'GET',
          credentials: 'include',
          headers: {

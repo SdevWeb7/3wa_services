@@ -16,7 +16,7 @@ function App() {
    const {setUser} = useContext(myContext)
 
    useEffect(() => {
-      fetch('http://localhost:3000/api/auth/me', {
+      fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/auth/me', {
          headers: {
             'Accept': 'application/json'
          },

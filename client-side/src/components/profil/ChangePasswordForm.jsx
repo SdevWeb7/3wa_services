@@ -51,7 +51,7 @@ export const ChangePasswordForm = () => {
 
         const data = new FormData(e.target);
 
-        const response = await fetch(`http://localhost:3000/api/auth/edit`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKENDL}/api/auth/edit`, {
             method: 'PATCH',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -70,7 +70,7 @@ export const ChangePasswordForm = () => {
     }
 
     const deleteUser = async () => {
-        const response = await fetch(`http://localhost:3000/api/auth/delete`, {
+        const response = await fetch(import.meta.env.VITE_BASE_URL_BACKENDL+`/api/auth/delete`, {
             method: 'DELETE',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
