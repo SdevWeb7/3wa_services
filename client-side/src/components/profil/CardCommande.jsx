@@ -36,7 +36,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
             },
             body: JSON.stringify({
                cost: commande.cost,
-               fromUserId: commande.from_user_id,
+               fromUserId: commande.user_id,
             })
          });
          const data = await response.json();

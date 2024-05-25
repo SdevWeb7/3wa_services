@@ -11,7 +11,7 @@ export const ProfileServices = () => {
 
 
    useEffect(() => {
-      fetch(import.meta.env.BASE_URL+'/api/services/user', {
+      fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/services/user', {
          credentials: 'include'
       }).then(response => response.json())
         .then(result => setServices(result))

@@ -26,7 +26,7 @@ export const AuthForm = () => {
         const data = new FormData(e.target);
         const action = data.get('action') === "subscribe" ? 'subscribe' : 'login';
 
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKENDL}/api/auth/${action}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/auth/${action}`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },

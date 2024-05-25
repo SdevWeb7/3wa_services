@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CardService } from "../components/CardService.jsx";
 
 export const Services = () => {
