@@ -25,6 +25,10 @@ export const CardService = ({service}) => {
             addToast('info', 'Vous devez être connecté pour commander un service.');
             return;
         }
+        if (user.sold < service.cost) {
+            addToast('info', 'Vous n\'avez pas assez de CommuniTokens pour commander ce service.');
+            return;
+        }
         if (!dateRef.current.value) {
             addToast('info', 'Veuillez renseigner une date pour la commande.');
             return;

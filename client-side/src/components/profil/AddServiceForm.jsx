@@ -4,8 +4,8 @@ import { useAppStore } from "../../utils/store.js";
 
 export const AddServiceForm = ({setServices}) => {
 
-   const addToast = useAppStore.use.addToast();
-   const [selectedImage, setSelectedImage] = useState(null);
+    const addToast = useAppStore.use.addToast();
+    const [selectedImage, setSelectedImage] = useState(null);
     const [formData, setFormData] = useState({
          title: '',
          description: '',
@@ -32,7 +32,7 @@ export const AddServiceForm = ({setServices}) => {
 
     const handleSubmit = (e) => {
        e.preventDefault();
-       if (formValid === false) return;
+       if (!formValid) return;
 
        const form = new FormData();
        form.append('image', e.target.image.files[0]);
@@ -131,6 +131,7 @@ export const AddServiceForm = ({setServices}) => {
              </select>
 
 
+          <label htmlFor={'image'}>Image d&apos;illustration</label>
           <input
              type="file"
              id={'image'}

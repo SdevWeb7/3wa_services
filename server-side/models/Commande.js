@@ -3,7 +3,10 @@ import { pool } from "../database/config.js";
 export class Commande {
 
    static async add(fromUserId, serviceId, forDateTime, toUserId) {
+      const [service] = await pool.execute('SELECT cost FROM service WHERE id = ?', [serviceId]);
+      const [user] = await pool.execute('SELECT sold FROM user WHERE id = ?', [fromUserId]);
 
+      if (user[0].sold < service[0].cost) return;
       await pool.execute('INSERT INTO orders (from_user_id, service_id, status, created_at, start_date, to_user_id) VALUES (?, ?, "En cours", NOW(), ?, ?)', [fromUserId, serviceId, forDateTime, toUserId]);
    }
 
