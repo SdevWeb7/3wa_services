@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Spinner } from "../../components/Spinner.jsx";
-import { ProfilNavbar } from "../../components/profil/ProfilNavbar.jsx";
 import { useContext } from "react";
 import { myContext } from "../../hooks/MyContextProvider.jsx";
+import { ErrorBoundary } from "../../hooks/ErrorBoundary.jsx";
 
 export const LayoutProfil = () => {
    const { user } = useContext(myContext);
@@ -14,11 +14,17 @@ export const LayoutProfil = () => {
 
    else return <section className={'profil-layout'}>
 
-         <ProfilNavbar/>
+         <nav className={'profil-navbar'}>
+            <Link to={'/profil/mes-services'}>Services</Link>
+            <Link to={'/profil/mes-commandes'}>Commandes</Link>
+            <Link to={'/profil/messagerie'}>Messagerie</Link>
+         </nav>
 
 
          <article className={"profil-content"}>
-            <Outlet/>
+            <ErrorBoundary fallback={<h1 className={'warning'}>Il y a eu une erreur</h1>}>
+               <Outlet/>
+            </ErrorBoundary>
          </article>
 
 

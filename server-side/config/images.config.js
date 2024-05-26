@@ -6,13 +6,13 @@ const storage = multer.diskStorage({
    destination: function (req, file, cb) {
       const newDirectory = path.join(
          process.cwd(),
-         "public/img/" + file.originalname
+         "public/img/"
       );
       fs.mkdirSync(newDirectory, { recursive: true });
       cb(null, newDirectory);
    },
    filename: function (req, file, cb) {
-      cb(null, Date.now() + path.extname(file.originalname));
+      cb(null, file.originalname);
    },
 });
 
@@ -23,7 +23,7 @@ export const upload = multer({
       fileSize: 5 * 1024 * 1024,
    },
    fileFilter: function (req, file, cb) {
-      const filetypes = /png|jpg|jpeg|webp/;
+      const filetypes = /png|jpg|jpeg|webp|svg/;
       const isExtnameValid = filetypes.test(
          path.extname(file.originalname).toLowerCase()
       );

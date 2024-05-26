@@ -7,8 +7,8 @@ import { LayoutProfil } from "./pages/profil/LayoutProfil.jsx";
 import { AuthForm } from "./pages/profil/AuthForm.jsx";
 import { ProfileHome } from "./pages/profil/ProfileHome.jsx";
 import { myContext } from "./hooks/MyContextProvider.jsx";
-import { Messagerie } from "./pages/profil/Messagerie.jsx";
-import { ProfileDemandes } from "./pages/profil/ProfileDemandes.jsx";
+import { ProfilMessagerie } from "./pages/profil/ProfilMessagerie.jsx";
+import { ProfileCommandes } from "./pages/profil/ProfileCommandes.jsx";
 import { ProfileServices } from "./pages/profil/ProfileServices.jsx";
 
 
@@ -33,13 +33,13 @@ function App() {
             <Route path={'/'} element={<Layout />}>
                <Route path={''} element={<Home />} />
 
-               {/*AuthCheck and Profil*/}
+
                <Route path={'auth'} element={<AuthForm />} />
                <Route path={'profil'} element={<LayoutProfil />}>
                   <Route path={''} element={<ProfileHome />} />
                   <Route path={'mes-services'} element={<ProfileServices />} />
-                  <Route path={'mes-demandes'} element={<ProfileDemandes />} />
-                  <Route path={'messagerie'} element={<Messagerie />} />
+                  <Route path={'mes-commandes'} element={<ProfileCommandes />} />
+                  <Route path={'messagerie'} element={<ProfilMessagerie />} />
                </Route>
 
 

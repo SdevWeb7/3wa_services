@@ -30,7 +30,8 @@ export const Services = () => {
          <h1>Tous les services</h1>
 
 
-         <p style={{textAlign: 'center', marginBottom: '1rem'}}>Page {page} / {totalPages}</p>
+         {totalPages > 1 && <p style={{textAlign: 'center', marginBottom: '1rem'}}>Page {page} / {totalPages}</p>}
+
          <div className="pagination">
 
             {page > 1 && <button

@@ -5,6 +5,7 @@ import { useAppStore } from "../../utils/store.js";
 export const AddServiceForm = ({setServices}) => {
 
    const addToast = useAppStore.use.addToast();
+   const [selectedImage, setSelectedImage] = useState(null);
     const [formData, setFormData] = useState({
          title: '',
          description: '',
@@ -16,7 +17,7 @@ export const AddServiceForm = ({setServices}) => {
     const titleIsValid = formData.title.length >= 5 && formData.title.length <= 50;
     const descriptionIsValid = formData.description.length >= 10 && formData.description.length <= 300;
     const costIsValid = Number(formData.cost) >= 100 && Number(formData.cost) <= 300;
-    const durationIsValid = Number(formData.duration) >= 0.5 && Number(formData.duration) <= 7;
+    const durationIsValid = Number(formData.duration) >= 1 && Number(formData.duration) <= 7;
 
 
     useEffect(() => {
@@ -30,31 +31,53 @@ export const AddServiceForm = ({setServices}) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+       e.preventDefault();
+       if (formValid === false) return;
+
+       const form = new FormData();
+       form.append('image', e.target.image.files[0]);
+       form.append('data', JSON.stringify(formData));
+
         fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/services/add', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify(formData)
+            body: form
         }).then(response => response.json())
           .then(result => {
                if (result.err) addToast('error', result.err);
                else {
                   addToast('success', result.message);
                   setServices(services => [...services, result.service]);
+                  setSelectedImage(null);
+                  setFormData({
+                     title: '',
+                     description: '',
+                     cost: '',
+                     duration: '',
+                     category: 'Informatique'
+                  });
                }
          }).catch(() => addToast('error', 'Il y a eu un problème'));
     }
 
+   const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      if (file) setSelectedImage(URL.createObjectURL(file));
+   };
+
 
    return <>
 
-       <form className={'add-service-form'} onSubmit={handleSubmit}>
+       <form
+          className={'add-service-form'}
+          onSubmit={handleSubmit}
+          encType={'multipart/form-data'}>
              <label htmlFor={'title'}>Titre</label>
              <input
                 id={"title"}
                 type="text"
                 name="title"
+                value={formData.title}
                 placeholder={"Titre du service"}
                 onChange={handleInputChange} />
              {!titleIsValid && <span>Entre 5 et 30 caractères</span>}
@@ -62,6 +85,7 @@ export const AddServiceForm = ({setServices}) => {
 
              <label htmlFor={'description'}>Description</label>
              <textarea
+                value={formData.description}
                 id={"description"}
                 name="description"
                 placeholder={"Description du service"}
@@ -71,6 +95,7 @@ export const AddServiceForm = ({setServices}) => {
 
              <label htmlFor={'cost'}>Coût</label>
              <input
+                value={formData.cost}
                 id={"cost"}
                 type="number"
                 name="cost"
@@ -81,16 +106,18 @@ export const AddServiceForm = ({setServices}) => {
 
              <label htmlFor={'duration'}>Durée (en heures)</label>
              <input
+                value={formData.duration}
                 id={"duration"}
                 type="number"
                 name="duration"
-                placeholder={'exemple: 1.5 pour une heure et demie'}
+                placeholder={'entre 1 heure et 7 heures'}
                 onChange={handleInputChange} />
-           {!durationIsValid && <span>Entre une demi-heure et 7h</span>}
+           {!durationIsValid && <span>Entre 1 heure et 7 heures</span>}
 
 
              <label htmlFor={'category'}>Catégorie</label>
              <select
+                value={formData.category}
                 id={"category"}
                 name="category"
                 onChange={handleInputChange}>
@@ -102,6 +129,14 @@ export const AddServiceForm = ({setServices}) => {
                 <option value="Cours particuliers">Cours particuliers</option>
                 <option value="Autres">Autres</option>
              </select>
+
+
+          <input
+             type="file"
+             id={'image'}
+             name={'image'}
+             onChange={handleImageChange}/>
+          {selectedImage && <img src={selectedImage} alt={'service preview'} />}
 
 
              <button

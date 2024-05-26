@@ -1,38 +1,17 @@
 import express from 'express';
 import path from 'path';
 import 'dotenv/config';
-import session from "express-session";
-import { createRequire } from 'module';
 import router from "./router/routes.config.js";
 import favicon from 'express-favicon';
 import cors from 'cors';
-import { pool } from "./database/config.js";
+import { configSession } from "./config/session.config.js";
 
-const require = createRequire(import.meta.url);
-const mySQLStore = require('express-mysql-session')(session);
+
 
 const app = express();
 const PORT = process.env.PORT_BACKEND;
 
-app.use(session({
-      name: 'session_id',
-      secret: process.env.APP_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      store: new mySQLStore({
-         clearExpired: true,
-         checkExpirationInterval: 900000, // 15 minutes
-         expiration: 1000 * 60 * 60 * 24 * 7,
-      }, pool),
-      cookie: {
-         secure: false,
-         httpOnly: true,
-         sameSite: 'lax',
-         maxAge: 1000 * 60 * 60 * 24 * 7,
-      },
-      rolling: true
-   })
-);
+app.use(configSession);
 
 
 app.use(cors({

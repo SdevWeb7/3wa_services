@@ -9,7 +9,7 @@ export const subscribe = async (req, res) => {
             const newUser = await User.create(email, password);
             req.session.user = newUser;
             req.session.save(err => {
-                  if (err) res.json({ message: 'Une erreur est survenue.', err: err.message });
+                  if (err) res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
             });
             res.json({message: 'Votre compte a bien été créé.', user: newUser});
 
@@ -32,7 +32,7 @@ export const login = async (req, res) => {
                   else res.json({ message: 'Vous êtes connecté.', user: user});
             });
       } catch (err) {
-            res.json({ message: 'Mauvais identifiants.', err: err.message });
+            res.json({ message: 'Mauvais identifiants.', err: 'Mauvais identifiants.' });
       }
 }
 
@@ -44,7 +44,7 @@ export const deleteUser = async (req, res) => {
             res.clearCookie('session_id');
             res.json({message: 'Votre compte a bien été supprimé.'});
       } catch (err) {
-            res.json({ message: 'Une erreur est survenue.', err: err.message });
+            res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
       }
 }
 
@@ -60,7 +60,7 @@ export const editUser = async (req, res) => {
             await User.editUser(req.session.user.id, req.body.password);
             res.json({message: 'Votre compte a bien été modifié.'});
       } catch (err) {
-            res.json({ message: 'Une erreur est survenue.', err: err.message});
+            res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
       }
 }
 

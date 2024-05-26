@@ -21,7 +21,7 @@ router.use('/api/auth', authRoutes);
 router.use('/api/services', servicesRoutes);
 
 
-// Messagerie
+// ProfilMessagerie
 router.use('/api/messagerie', messagerieRoutes);
 
 

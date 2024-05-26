@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardMessage } from "../../components/profil/CardMessage.jsx";
 
-export const Messagerie = () => {
+export const ProfilMessagerie = () => {
    const [messages, setMessages] = useState([])
 
 
@@ -22,7 +22,7 @@ export const Messagerie = () => {
 
       <section className="container-messages">
 
-         {messages.map((message, index) => <CardMessage setMessages={setMessages} key={index} message={message} />)}
+         {messages && messages.map((message, index) => <CardMessage setMessages={setMessages} key={index} message={message} />)}
 
       </section>
    </>
