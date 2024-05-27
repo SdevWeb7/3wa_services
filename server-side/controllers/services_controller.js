@@ -59,7 +59,7 @@ export const user_services = async (req, res) => {
 
 export const delete_service = async (req, res) => {
    try {
-      const service = await Service.getService(req.params.id);
+      const service = await Service.getService(req.params.serviceId);
       if (service.img_src !== 'http://via.placeholder.com/640x360') {
          const pathImage = path.join(process.cwd(), 'public', 'img', service.img_src);
          fs.stat(pathImage, async(err, stats) => {
@@ -73,7 +73,7 @@ export const delete_service = async (req, res) => {
             }
          });
       }
-      await Service.deleteService(req.params.id, req.session.user.id);
+      await Service.deleteService(req.params.serviceId, req.session.user.id);
       res.json({message: "Le service a bien été supprimé"});
    } catch (err) {
       return res.status(500).json({message: "Erreur interne", err: 'Erreur interne'});

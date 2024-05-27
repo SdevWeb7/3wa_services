@@ -10,7 +10,7 @@ export const ProfileHome = () => {
       <h1>Profil</h1>
 
 
-      <p style={{textAlign: 'center'}}>Bienvenue sur votre profil {user.email}.</p>
+      <p style={{textAlign: 'center'}}>Bienvenue sur votre profil <b>{user.email}</b>.</p>
 
       <p style={{textAlign: 'center'}}>Vous pouvez ici modifier vos informations personnelles.</p>
 

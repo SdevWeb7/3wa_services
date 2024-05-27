@@ -15,7 +15,7 @@ router.get('/user', securityMiddleware, user_services);
 router.post('/add', securityMiddleware, add_service);
 
 
-router.delete('/delete/:id', securityMiddleware, delete_service);
+router.delete('/delete/:serviceId', securityMiddleware, delete_service);
 
 
 

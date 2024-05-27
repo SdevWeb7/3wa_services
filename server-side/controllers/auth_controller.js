@@ -12,7 +12,6 @@ export const subscribe = async (req, res) => {
                   if (err) res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
             });
             res.json({message: 'Votre compte a bien été créé.', user: newUser});
-
       } catch(err) {
             res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
       }
@@ -24,13 +23,11 @@ export const login = async (req, res) => {
 
       try {
             const user = await User.login(email, password)
-
             req.session.user = user;
             req.session.save(err => {
-                  if (err) res.json({ message: 'Une erreur est survenue.', err: err.message });
-
-                  else res.json({ message: 'Vous êtes connecté.', user: user});
+                  if (err) res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
             });
+            res.json({ message: 'Vous êtes connecté.', user: user});
       } catch (err) {
             res.json({ message: 'Mauvais identifiants.', err: 'Mauvais identifiants.' });
       }
