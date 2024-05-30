@@ -16,7 +16,7 @@ export const router = Router();
 
 router.get('/all', securityMiddleware, all_commandes);
 
-router.post('/add/:serviceId/:toUserId', securityMiddleware, add_commande);
+router.post('/add/:serviceId', securityMiddleware, add_commande);
 
 
 

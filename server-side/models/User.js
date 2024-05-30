@@ -3,15 +3,16 @@ import { compareSync, hash, hashSync } from "bcrypt";
 
 class User {
 
-   static async create(email, password) {
-      const result = await User.findByEmail(email);
+   static async create(email, password, pseudonyme){
+      const result = await User.findByEmailOrPseudo(email, pseudonyme);
       if (result) throw new Error('Problème interne.');
 
       const hashResult = await hashSync(password, 10);
 
       const result2 = await pool.execute(`
-         INSERT INTO user (email, password, created_at)
-         VALUES (?, ?, NOW())`, [email, hashResult]);
+         INSERT INTO user (email, password, pseudonyme, created_at)
+         VALUES (?, ?, ?, NOW())`,
+         [email, hashResult, pseudonyme]);
 
       const newUser = await User.findById(result2[0].insertId);
       return newUser;
@@ -27,6 +28,8 @@ class User {
          return {
             id: result.id,
             email: result.email,
+            pseudonyme: result.pseudonyme,
+            isBanned: result.isBanned,
             sold: result.sold,
             services_rendered: result.services_rendered,
             created_at: result.created_at
@@ -36,7 +39,9 @@ class User {
 
    static async deleteUser(id){
          const result = await pool.execute(`
-            DELETE FROM user WHERE id = ?`, [id]);
+            DELETE FROM user
+            WHERE id = ?`,
+            [id]);
          return result;
    }
 
@@ -45,36 +50,43 @@ class User {
             if (err) throw err;
 
             await pool.execute(`
-                UPDATE user set password = ? WHERE id = ?`, [pass, id]);
+                UPDATE user set password = ?
+                WHERE id = ?`,
+               [pass, id]);
          });
    }
 
 
    static async findById(id){
       const result = await pool.execute(`
-         SELECT id, email, sold, services_rendered, created_at
-         FROM user WHERE id = ?`, [id]);
+         SELECT id, email, pseudonyme, sold,
+                services_rendered, created_at, isBanned
+         FROM user WHERE id = ?`,
+         [id]);
       return result[0][0];
    }
 
-   static async findByEmail(email){
+   static async findByEmailOrPseudo(email, pseudonyme){
       const result = await pool.execute(`
-         SELECT id, email, sold, services_rendered, created_at
-         FROM user WHERE email = ?`, [email]);
+         SELECT id
+         FROM user WHERE email = ? OR pseudonyme = ?`,
+         [email, pseudonyme]);
       return result[0][0];
    }
 
    static async findByEmailWithPassword(email){
       const result = await pool.execute(`
-         SELECT id, email, password, sold, services_rendered, created_at
-         FROM user WHERE email = ?`, [email]);
+         SELECT *
+         FROM user WHERE email = ?`,
+         [email]);
       return result[0][0];
    }
 
-   static async findByIdWithPassword(id){
+   static async findPasswordById(id){
       const result = await pool.execute(`
-         SELECT id, email, password, sold, services_rendered, created_at
-         FROM user WHERE id = ?`, [id]);
+         SELECT password
+         FROM user WHERE id = ?`,
+         [id]);
       return result[0][0];
    }
 }

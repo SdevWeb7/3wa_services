@@ -3,17 +3,21 @@ import { compareSync } from "bcrypt";
 
 
 export const subscribe = async (req, res) => {
-      const { email, password } = req.body;
+      const { email, password, pseudonyme } = req.body;
 
       try {
-            const newUser = await User.create(email, password);
+            const user = await User.create(email, password, pseudonyme);
             req.session.user = newUser;
             req.session.save(err => {
-                  if (err) res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
+                  if (err) res.json({
+                        message: 'Une erreur est survenue.',
+                        err: 'Une erreur est survenue.' });
             });
-            res.json({message: 'Votre compte a bien été créé.', user: newUser});
+            res.json({message: 'Votre compte a bien été créé.', user});
       } catch(err) {
-            res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
+            res.json({
+                  message: 'Une erreur est survenue.',
+                  err: 'Une erreur est survenue.' });
       }
 
 }
@@ -25,11 +29,15 @@ export const login = async (req, res) => {
             const user = await User.login(email, password)
             req.session.user = user;
             req.session.save(err => {
-                  if (err) res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
+                  if (err) res.json({
+                        message: 'Une erreur est survenue.',
+                        err: 'Une erreur est survenue.' });
             });
-            res.json({ message: 'Vous êtes connecté.', user: user});
+            res.json({ message: 'Vous êtes connecté.', user});
       } catch (err) {
-            res.json({ message: 'Mauvais identifiants.', err: 'Mauvais identifiants.' });
+            res.json({
+                  message: 'Mauvais identifiants.',
+                  err: 'Mauvais identifiants.' });
       }
 }
 
@@ -41,13 +49,15 @@ export const deleteUser = async (req, res) => {
             res.clearCookie('session_id');
             res.json({message: 'Votre compte a bien été supprimé.'});
       } catch (err) {
-            res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
+            res.json({
+                  message: 'Une erreur est survenue.',
+                  err: 'Une erreur est survenue.' });
       }
 }
 
 export const editUser = async (req, res) => {
       try {
-            const checkUser = await User.findByIdWithPassword(req.session.user.id);
+            const checkUser = await User.findPasswordById(req.session.user.id);
 
             if (!checkUser) throw new Error('Problème interne.');
 
@@ -57,7 +67,9 @@ export const editUser = async (req, res) => {
             await User.editUser(req.session.user.id, req.body.password);
             res.json({message: 'Votre compte a bien été modifié.'});
       } catch (err) {
-            res.json({ message: 'Une erreur est survenue.', err: 'Une erreur est survenue.' });
+            res.json({
+                  message: 'Une erreur est survenue.',
+                  err: 'Une erreur est survenue.' });
       }
 }
 
