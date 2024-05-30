@@ -46,6 +46,23 @@
   }
 }
 
+.searchInput {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 0 auto 3rem auto;
+
+  label {
+    margin-bottom: .2rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  input {
+    text-align: center;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+  }
+}
 .pagination {
   display: flex;
   justify-content: center;

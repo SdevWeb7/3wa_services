@@ -30,14 +30,16 @@ export const Services = () => {
 
          <h1>Tous les services</h1>
 
-         <label htmlFor="searchKey">Rechercher un service</label>
-         <input
-            id={'searchKey'}
-            type="text"
-            name={'searchKey'}
-            placeholder={'Entrez un mot clé'}
-            value={searchKey}
-            onChange={e => setSearchKey(e.target.value)} />
+         <div className="searchInput">
+            <label htmlFor="searchKey">Rechercher un service</label>
+            <input
+               id={'searchKey'}
+               type="text"
+               name={'searchKey'}
+               placeholder={'Entrez un mot clé'}
+               value={searchKey}
+               onChange={e => setSearchKey(e.target.value)} />
+         </div>
 
          {totalPages > 1 && <p style={{textAlign: 'center', marginBottom: '1rem'}}>Page {page} / {totalPages}</p>}
 
