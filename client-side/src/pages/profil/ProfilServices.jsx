@@ -4,23 +4,29 @@ import { IconTrash } from "../../svg/IconTrash.jsx";
 import { useAppStore } from "../../utils/store.js";
 
 
-export const ProfileServices = () => {
+export const ProfilServices = () => {
    const addToast = useAppStore.use.addToast();
    const [services, setServices] = useState([]);
    const [addFormIsOpen, setAddFormIsOpen] = useState(false);
+   const [categories, setCategories] = useState([]);
 
 
    useEffect(() => {
       fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/services/user', {
          credentials: 'include'
       }).then(response => response.json())
-        .then(result => setServices(result))
+        .then(result => {
+           setServices(result[0]);
+           setCategories(result[1]);
+        })
         .catch(err => console.log(err));
    }, []);
 
 
    const deleteService = async (id) => {
-      if (confirm('Voulez-vous vraiment supprimer ce service ?') === false) return;
+      if (confirm('Voulez-vous vraiment supprimer ce service ?') === false){
+         return;
+      }
       const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/services/delete/${id}`, {
          method: 'DELETE',
          credentials: 'include'
@@ -42,9 +48,9 @@ export const ProfileServices = () => {
             {addFormIsOpen ? 'Fermer le formulaire' : 'Ajouter un service'}</button>
 
 
-      {addFormIsOpen && <AddServiceForm setServices={setServices} />}
-
-
+      {addFormIsOpen && <AddServiceForm
+                              setServices={setServices}
+                              categories={categories} />}
 
       <table>
          <thead>
@@ -58,7 +64,7 @@ export const ProfileServices = () => {
             {services.map(service => (
                <tr key={service.id}>
                   <td>{service.title}</td>
-                  <td>{service.category}</td>
+                  <td>{service.category_name}</td>
                   <td><button
                         onClick={() => deleteService(service.id)}
                         style={{padding: '3px'}}

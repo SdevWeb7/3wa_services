@@ -27,12 +27,10 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
          return;
       }
       try {
-         const response = await fetch(import.meta.env.VITE_BASE_URL_BACKEND+`/api/messagerie/send`, {
+         const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/messagerie/send`, {
             method: 'POST',
             credentials: 'include',
-            headers: {
-               'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formDatas)
          })
          const data = await response.json();

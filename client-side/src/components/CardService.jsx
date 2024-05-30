@@ -9,7 +9,7 @@ export const CardService = ({service}) => {
     const [sendMessageModalIsOpen, setSendMessageModalIsOpen] = useState(false);
     const addToast = useAppStore.use.addToast()
     const dateRef = useRef(null);
-    const imgSrc = service.img_src.length > 0 ? `${import.meta.env.VITE_BASE_URL_BACKEND}/img/${service.img_src}` : 'http://via.placeholder.com/240x150';
+
 
     const handleMessageModal = () => {
         if (user && user.email) {
@@ -33,7 +33,7 @@ export const CardService = ({service}) => {
             return;
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/add/${service.id}/${service.user_id}`, {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/add/${service.id}`, {
                 method: 'POST',
                 credentials: 'include',
                   headers: {
@@ -45,11 +45,8 @@ export const CardService = ({service}) => {
             })
             const data = await response.json();
 
-            if (data.err) {
-                addToast('error', 'Il y a eu une erreur lors de la commande. Veuillez réessayer.');
-            } else {
-                addToast('success', 'Commande effectuée avec succès !');
-            }
+            if (data.err) addToast('error', 'Il y a eu une erreur lors de la commande. Veuillez réessayer.');
+            else addToast('success', 'Commande effectuée avec succès !');
         } catch (error) {
             addToast('error', 'Il y a eu une erreur lors de la commande. Veuillez réessayer.');
         }
@@ -61,11 +58,11 @@ export const CardService = ({service}) => {
           key={service.id}
           className={'service'}>
 
-           <p><span>Catégorie :</span> {service.category}</p>
+           <p><span>Catégorie :</span> {service.category_name}</p>
            <h2>{service.title}</h2>
 
            <img
-              src={imgSrc}
+              src={service.img_src}
               width={230}
               alt={service.title}/>
 
@@ -90,7 +87,7 @@ export const CardService = ({service}) => {
 
 
            <div className="footer-card">
-               <p><span>Ajouté par :</span> {service.email} qui a déjà
+               <p><span>Ajouté par :</span> {service.pseudonyme} qui a déjà
                    rendu {service.services_rendered} service(s).</p>
 
                <p>
@@ -101,7 +98,7 @@ export const CardService = ({service}) => {
 
            {sendMessageModalIsOpen && <SendMessageModal
               setIsOpen={setSendMessageModalIsOpen}
-              toUserId={service.user_id}/>}
+              toUserId={service.user_id} />}
 
 
        </article>

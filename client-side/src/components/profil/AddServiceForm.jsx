@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppStore } from "../../utils/store.js";
 
 
-export const AddServiceForm = ({setServices}) => {
+export const AddServiceForm = ({setServices, categories = []}) => {
 
     const addToast = useAppStore.use.addToast();
     const [selectedImage, setSelectedImage] = useState(null);
@@ -11,7 +11,7 @@ export const AddServiceForm = ({setServices}) => {
          description: '',
          cost: '',
          duration: '',
-         category: 'Informatique'
+         categoryId: 1
     });
     const [formValid, setFormValid] = useState(false);
     const titleIsValid = formData.title.length >= 5 && formData.title.length <= 50;
@@ -21,13 +21,19 @@ export const AddServiceForm = ({setServices}) => {
 
 
     useEffect(() => {
-        if (titleIsValid && descriptionIsValid && costIsValid && durationIsValid) setFormValid(true);
+        if (titleIsValid &&
+           descriptionIsValid &&
+           costIsValid &&
+           durationIsValid) setFormValid(true);
+
         else setFormValid(false);
     }, [formData]);
 
 
     const handleInputChange = (e) => {
-         setFormData({ ...formData, [e.target.name]: e.target.value });
+         setFormData({
+            ...formData,
+            [e.target.name]: e.target.value });
     }
 
     const handleSubmit = (e) => {
@@ -38,7 +44,7 @@ export const AddServiceForm = ({setServices}) => {
        form.append('image', e.target.image.files[0]);
        form.append('data', JSON.stringify(formData));
 
-        fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/services/add', {
+        fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/services/add`, {
             method: 'POST',
             credentials: 'include',
             body: form
@@ -54,7 +60,7 @@ export const AddServiceForm = ({setServices}) => {
                      description: '',
                      cost: '',
                      duration: '',
-                     category: 'Informatique'
+                     categoryId: 1
                   });
                }
          }).catch(() => addToast('error', 'Il y a eu un problème'));
@@ -119,15 +125,14 @@ export const AddServiceForm = ({setServices}) => {
              <select
                 value={formData.category}
                 id={"category"}
-                name="category"
+                name="categoryId"
                 onChange={handleInputChange}>
-                <option value="Informatique">Informatique</option>
-                <option value="Cuisine">Cuisine</option>
-                <option value="Ménage">Ménage</option>
-                <option value="Jardinage">Jardinage</option>
-                <option value="Bricolage">Bricolage</option>
-                <option value="Cours particuliers">Cours particuliers</option>
-                <option value="Autres">Autres</option>
+                {categories.map(category => (
+                   <option
+                      key={category.id}
+                      value={category.id}>{category.name}</option>
+                ))}
+
              </select>
 
 

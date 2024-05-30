@@ -22,7 +22,8 @@ export const ProfilMessagerie = () => {
 
       <section className="container-messages">
 
-         {messages && messages.map((message, index) => <CardMessage setMessages={setMessages} key={index} message={message} />)}
+         {messages.length > 0 ? messages.map((message, index) => (
+            <CardMessage setMessages={setMessages} key={index} message={message} />)) : <p>Vous n'avez aucun message</p>}
 
       </section>
    </>

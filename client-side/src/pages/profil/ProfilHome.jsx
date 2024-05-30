@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 
-export const ProfileHome = () => {
+export const ProfilHome = () => {
    const {user} = useContext(myContext);
 
    return <>

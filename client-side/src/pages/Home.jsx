@@ -20,6 +20,7 @@ export const Home = () => {
 
        <h2 style={{marginTop: "7rem"}}>Règlements</h2>
 
+       
        <ul>
           <li>Chaque membre reçoit 1000 CommuniTokens à son inscription.</li>
           <li>Les services doivent être légaux et censés : il y aura une modération et votre compte pourra être
@@ -33,6 +34,7 @@ export const Home = () => {
        <h2 style={{marginTop: "7rem"}}>Récompenses</h2>
        <p>En fonction de l&apos;évolution de la plateforme des récompenses pourront être gagnées en fonction du nombre de services rendus :</p>
 
+
        <ul style={{marginTop: '2rem'}}>
           <li>CommuniTokens</li>
           <li>Cartes cadeaux</li>
@@ -41,8 +43,17 @@ export const Home = () => {
 
 
        <div className="links-home">
-          {!user || Object.keys(user).length === 0 && <Link to={'/auth'} className={'btn btn-primary'}>S&apos;inscrire / Se connecter</Link>}
-         <Link to={'/services'} target={'_top'} className={'btn btn-secondary'}>Explorer les services</Link>
+
+          {!user || Object.keys(user).length === 0 && <>
+            <Link
+               to={'/auth'}
+               className={'btn btn-primary'}>S&apos;inscrire / Se connecter</Link></>}
+
+
+         <Link
+            to={'/services'}
+            target={'_top'}
+            className={'btn btn-secondary'}>Explorer les services</Link>
        </div>
 
     </main>;

@@ -4,7 +4,7 @@ import { CardCommande } from "../../components/profil/CardCommande.jsx";
 
 
 
-export const ProfileCommandes = () => {
+export const ProfilCommandes = () => {
 
    const [commandesPasses, setCommandesPasses] = useState([]);
    const [commandesRecues, setCommandesRecues] = useState([]);
@@ -30,13 +30,13 @@ export const ProfileCommandes = () => {
 
 
    return <>
-      <h1>Mes demandes</h1>
+      <h1>Mes commandes</h1>
 
 
       <h2>Commandes reçues</h2>
 
       <section className="container-commandes">
-         {commandesRecues && Object.keys(commandesRecues).length > 0 ? commandesRecues.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} setCommandes={setCommandesRecues} />) : <p>Vous n'avez pas de commandes reçues</p>}
+         {commandesRecues && Object.keys(commandesRecues).length > 0 ? commandesRecues.map(commande => <CardCommande key={commande.id} commande={commande} setCommandes={setCommandesRecues} />) : <p>Vous n'avez pas de commandes reçues</p>}
       </section>
 
 

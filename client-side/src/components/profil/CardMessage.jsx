@@ -25,7 +25,6 @@ export const CardMessage = ({message, setMessages}) => {
             }
         } catch (error) {
             addToast('error', 'Erreur lors de la suppression du message');
-            console.log(error)
         }
     }
 
@@ -34,7 +33,7 @@ export const CardMessage = ({message, setMessages}) => {
        <article className={'card-message'}>
 
 
-           <p><span>Message de :</span> {message.sender_email}</p>
+           <p><span>Message de :</span> {message.sender_pseudonyme}</p>
            <p><span>Sujet : </span>{message.subject}</p>
            <p>{message.content}</p>
 

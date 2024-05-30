@@ -5,27 +5,25 @@ import { Services } from "./pages/Services.jsx";
 import { useContext, useEffect } from "react";
 import { LayoutProfil } from "./pages/profil/LayoutProfil.jsx";
 import { AuthForm } from "./pages/profil/AuthForm.jsx";
-import { ProfileHome } from "./pages/profil/ProfileHome.jsx";
+import { ProfilHome } from "./pages/profil/ProfilHome.jsx";
 import { myContext } from "./hooks/MyContextProvider.jsx";
 import { ProfilMessagerie } from "./pages/profil/ProfilMessagerie.jsx";
-import { ProfileCommandes } from "./pages/profil/ProfileCommandes.jsx";
-import { ProfileServices } from "./pages/profil/ProfileServices.jsx";
+import { ProfilCommandes } from "./pages/profil/ProfilCommandes.jsx";
+import { ProfilServices } from "./pages/profil/ProfilServices.jsx";
 
 
 function App() {
-   const {setUser} = useContext(myContext)
+   const {setUser, user} = useContext(myContext)
 
    useEffect(() => {
-      fetch(import.meta.env.VITE_BASE_URL_BACKEND+'/api/auth/me', {
-         headers: {
-            'Accept': 'application/json'
-         },
+      fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/auth/me`, {
          credentials: 'include'
-      })
-            .then(r => r.json())
-            .then(d => setUser(d))
+      }).then(r => r.json())
+         .then(d => setUser(d))
+         .catch(e => console.error(e))
    }, [])
 
+   console.log(user)
 
    return <>
       <BrowserRouter>
@@ -36,9 +34,9 @@ function App() {
 
                <Route path={'auth'} element={<AuthForm />} />
                <Route path={'profil'} element={<LayoutProfil />}>
-                  <Route path={''} element={<ProfileHome />} />
-                  <Route path={'mes-services'} element={<ProfileServices />} />
-                  <Route path={'mes-commandes'} element={<ProfileCommandes />} />
+                  <Route path={''} element={<ProfilHome />} />
+                  <Route path={'mes-services'} element={<ProfilServices />} />
+                  <Route path={'mes-commandes'} element={<ProfilCommandes />} />
                   <Route path={'messagerie'} element={<ProfilMessagerie />} />
                </Route>
 
