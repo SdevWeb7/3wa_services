@@ -14,8 +14,7 @@ class User {
          VALUES (?, ?, ?, NOW())`,
          [email, hashResult, pseudonyme]);
 
-      const newUser = await User.findById(result2[0].insertId);
-      return newUser;
+      return await User.findById(result2[0].insertId);
    }
 
    static async login(email, password){

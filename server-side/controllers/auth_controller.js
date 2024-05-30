@@ -7,7 +7,7 @@ export const subscribe = async (req, res) => {
 
       try {
             const user = await User.create(email, password, pseudonyme);
-            req.session.user = newUser;
+            req.session.user = user;
             req.session.save(err => {
                   if (err) res.json({
                         message: 'Une erreur est survenue.',
