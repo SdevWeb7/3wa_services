@@ -9,7 +9,9 @@ class User {
 
       const hashResult = await hashSync(password, 10);
 
-      const result2 = await pool.execute("INSERT INTO user (email, password, created_at) VALUES (?, ?, NOW())", [email, hashResult]);
+      const result2 = await pool.execute(`
+         INSERT INTO user (email, password, created_at)
+         VALUES (?, ?, NOW())`, [email, hashResult]);
 
       const newUser = await User.findById(result2[0].insertId);
       return newUser;
@@ -33,7 +35,8 @@ class User {
 
 
    static async deleteUser(id){
-         const result = await pool.execute("DELETE FROM user WHERE id = ?", [id]);
+         const result = await pool.execute(`
+            DELETE FROM user WHERE id = ?`, [id]);
          return result;
    }
 
@@ -41,28 +44,37 @@ class User {
          hash(password, 10, async (err, pass) => {
             if (err) throw err;
 
-            await pool.execute("UPDATE user set password = ? WHERE id = ?", [pass, id]);
+            await pool.execute(`
+                UPDATE user set password = ? WHERE id = ?`, [pass, id]);
          });
    }
 
 
    static async findById(id){
-      const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
+      const result = await pool.execute(`
+         SELECT id, email, sold, services_rendered, created_at
+         FROM user WHERE id = ?`, [id]);
       return result[0][0];
    }
 
    static async findByEmail(email){
-      const result = await pool.execute("SELECT id, email, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
+      const result = await pool.execute(`
+         SELECT id, email, sold, services_rendered, created_at
+         FROM user WHERE email = ?`, [email]);
       return result[0][0];
    }
 
    static async findByEmailWithPassword(email){
-      const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE email = ?", [email]);
+      const result = await pool.execute(`
+         SELECT id, email, password, sold, services_rendered, created_at
+         FROM user WHERE email = ?`, [email]);
       return result[0][0];
    }
 
    static async findByIdWithPassword(id){
-      const result = await pool.execute("SELECT id, email, password, sold, services_rendered, created_at FROM user WHERE id = ?", [id]);
+      const result = await pool.execute(`
+         SELECT id, email, password, sold, services_rendered, created_at
+         FROM user WHERE id = ?`, [id]);
       return result[0][0];
    }
 }

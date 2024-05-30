@@ -11,7 +11,6 @@ export const CardService = ({service}) => {
     const dateRef = useRef(null);
     const imgSrc = service.img_src.length > 0 ? `${import.meta.env.VITE_BASE_URL_BACKEND}/img/${service.img_src}` : 'http://via.placeholder.com/240x150';
 
-    console.log(service);
     const handleMessageModal = () => {
         if (user && user.email) {
             setSendMessageModalIsOpen(true);

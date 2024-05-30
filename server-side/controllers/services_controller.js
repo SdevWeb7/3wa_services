@@ -8,8 +8,9 @@ const PER_PAGE = 5;
 export const all_services = async (req, res) => {
    const offset = req.query.page ? (req.query.page - 1) * PER_PAGE : 0;
    const userId = req.session.user ? req.session.user.id : '';
+   const searchKey = req.query.searchKey ? req.query.searchKey : '';
    try {
-      const [services, totalServices] = await Service.allServices(PER_PAGE, offset, userId);
+      const [services, totalServices] = await Service.allServices(PER_PAGE, offset, userId, searchKey);
       res.json([services, totalServices]);
 
    } catch (err) {
