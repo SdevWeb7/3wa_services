@@ -13,7 +13,7 @@ import { ProfilServices } from "./pages/profil/ProfilServices.jsx";
 
 
 function App() {
-   const {setUser, user} = useContext(myContext)
+   const {setUser} = useContext(myContext)
 
    useEffect(() => {
       fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/auth/me`, {
@@ -23,7 +23,6 @@ function App() {
          .catch(e => console.error(e))
    }, [])
 
-   console.log(user)
 
    return <>
       <BrowserRouter>

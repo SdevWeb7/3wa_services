@@ -56,7 +56,6 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
       } catch (error) {
          addToast('error', 'Il y a eu un problème.');
       }
-
    }
 
 
@@ -64,7 +63,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
 
       <h3>{commande.title}</h3>
       <p><span>Le :</span> {new Date(commande.created_at).toLocaleDateString()}</p>
-      <p><span>Par : </span>{commande.user_email}</p>
+      <p><span>{finalisable ? 'Par' : "A"} : </span>{commande.pseudonyme}</p>
       <p><span>Pour le : </span>{new Date(commande.start_date).toLocaleDateString()}</p>
 
       <p><span>Status : </span>{commande.status}</p>

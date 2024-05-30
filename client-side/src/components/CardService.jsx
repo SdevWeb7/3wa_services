@@ -9,6 +9,7 @@ export const CardService = ({service}) => {
     const [sendMessageModalIsOpen, setSendMessageModalIsOpen] = useState(false);
     const addToast = useAppStore.use.addToast()
     const dateRef = useRef(null);
+    const imgSrc = service.img_src === 'http://via.placeholder.com/640x360' ? service.img_src : `${import.meta.env.VITE_BASE_URL_BACKEND}/img/${service.img_src}`;
 
 
     const handleMessageModal = () => {
@@ -62,7 +63,7 @@ export const CardService = ({service}) => {
            <h2>{service.title}</h2>
 
            <img
-              src={service.img_src}
+              src={imgSrc}
               width={230}
               alt={service.title}/>
 
