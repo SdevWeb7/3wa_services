@@ -7,7 +7,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
@@ -15,12 +15,11 @@
 
   .navlink {
     color: whitesmoke !important;
-    font-size: 5rem !important;
+    font-size: 5rem;
 
-    &:hover {
-      border-color: whitesmoke !important;
-    }
+    &:hover { border-color: whitesmoke !important; }
   }
+
   svg {
     align-self: end;
     margin: 4rem 4rem 0 0;
@@ -30,17 +29,11 @@
 
 
 @keyframes slideInMenu {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 
 }
 
-@media screen and (max-width: 500px){
-  .menu-burger {
-    display: flex;
-  }
+@media screen and (min-width: 600px){
+  .menu-burger { display: none; }
 }

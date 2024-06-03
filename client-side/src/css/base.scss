@@ -1,5 +1,5 @@
 
-html { font-size: 50%; }
+html { font-size: 62.5%; }
 
 html, body, * {
   margin: 0;
@@ -11,32 +11,31 @@ body {
   font-weight: 400;
   background-color: var(--background);
   color: var(--text);
+  word-break: break-word;
 }
 
 .main {
   padding: 0 1rem;
-  min-height: 79vh;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5 { font-weight: 700; }
+h1, h2, h3, h4, h5 { font-weight: 700; font-family: "LucioleRegular"; }
 
 h1, h2 {
-  font-size: 3.7rem;
+  font-size: 5rem;
   text-align: center;
-  margin: 4rem 0;
+  margin: 2rem 0;
 }
 
-h2 { font-size: 3rem; text-decoration: underline; }
+h2 { font-size: 3rem; }
 
-h3 { font-size: 3.7rem; }
+h3 { font-size: 2.5rem; }
 
-p, li { font-size: 1.8rem; }
+p, li, input, label, a, textarea, select { font-size: 1.8rem; }
 
 li { margin-left: 2rem; }
 li:not(:last-child) { margin-bottom: 1rem; }
-
 
 
 .links-home {
@@ -49,7 +48,5 @@ li:not(:last-child) { margin-bottom: 1rem; }
 
 
 @media screen and (min-width: 800px) {
-  html { font-size: 62.5%; }
-  h1 { font-size: 6.7rem; }
-  h2 { font-size: 5rem; }
+  html { font-size: 80%; }
 }

@@ -12,13 +12,13 @@ export const Footer = () => {
        <footer className={'footer'}>
 
           <aside className={'theme'}>
+             {theme === 'dark' ? <IconMoon /> : <IconSun />}
              <button
                 className={'btn btn-primary'}
                 onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>Thème {theme === 'dark' ? 'Clair' : "Sombre"}</button>
-             {theme === 'dark' ? <IconMoon /> : <IconSun />}
           </aside>
 
-          <p className={'copyright'}>Steven pour le diplôme de la 3W Academy</p>
+          <p className={'copyright'}>Steven FSJS 36 pour le diplôme de la 3W Academy</p>
           <p>© 2024 - Tous droits réservés</p>
 
        </footer>

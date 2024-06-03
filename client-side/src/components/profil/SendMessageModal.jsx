@@ -47,7 +47,7 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
    }
 
 
-   return createPortal(<section className={'send-message-modal'}>
+   return createPortal(<section onClick={() => setIsOpen(false)} className={'send-message-modal'}>
 
 
       <form onSubmit={e => e.preventDefault()}>

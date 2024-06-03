@@ -1,8 +1,6 @@
 footer {
   margin: 4rem 0 0 0;
-  padding: 2rem 1rem 0 1rem;
-  font-size: 1.6rem;
-  font-weight: 500;
+  padding: 2rem 1rem 1rem 1rem;
   text-align: center;
   box-shadow: 0 -2px 4px var(--borders);
 
@@ -13,7 +11,5 @@ footer {
     gap: 2rem;
   }
 
-  .copyright {
-    margin-top: 2rem;
-  }
+  .copyright { margin-top: 2rem; }
 }

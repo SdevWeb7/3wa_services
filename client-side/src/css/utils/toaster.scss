@@ -10,43 +10,28 @@
   align-items: center;
   width: 17rem;
   font-weight: bolder;
-  font-size: 1rem;
   animation: slideIn 0.5s ease-in-out;
 
-  * {
-    margin-bottom: 2rem;
-  }
+  * { margin-bottom: 2rem; }
+
   svg {
     align-self: end;
-    width: 1rem;
-    height: 1rem;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     opacity: .6;
 
-    &:hover {
-      opacity: 1;
-    }
+    &:hover { opacity: 1; }
   }
-  .toast {
-    color: var(--text);
-  }
-  .toast-success {
-    color: var(--toast-success);
-  }
-  .toast-error {
-    color: var(--toast-error);
-  }
-  .toast-info {
-    color: var(--toast-info);
-  }
+  .toast { color: var(--text); }
+
+  .toast-success { color: var(--toast-success); }
+  .toast-error { color: var(--toast-error); }
+  .toast-info { color: var(--toast-info); }
 }
 
 
 @keyframes slideIn {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }

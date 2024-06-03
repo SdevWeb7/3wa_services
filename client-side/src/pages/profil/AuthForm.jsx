@@ -70,7 +70,7 @@ export const AuthForm = () => {
 
             <h1>Authentification</h1>
 
-            <form className={"auth-form"} onSubmit={handleForm}>
+            <form className={"form"} onSubmit={handleForm}>
                 <label className={'label'} htmlFor={"email"}>Votre e-mail</label>
                 <input
                    className={'input'}

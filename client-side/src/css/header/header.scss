@@ -1,5 +1,5 @@
 .header {
-  font-size: 2rem;
+  font-family: LucioleRegular;
   box-shadow: 0 2px 4px var(--borders);
   padding: 1rem 2rem;
   display: flex;
@@ -19,21 +19,19 @@
     align-items: center;
     gap: 4rem;
   }
-  .burger {
-    display: none;
-  }
 
+  .burger { display: block; }
+
+  .navlink { display: none; }
+
+  .btn { padding: 10px 12px; }
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 600px) {
 
   .header {
-    .burger {
-        display: block;
-    }
-    .navlink {
-      display: none;
-    }
+    .burger { display: none; }
+    .navlink { display: inline; }
   }
 }

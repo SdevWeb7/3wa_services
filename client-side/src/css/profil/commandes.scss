@@ -6,36 +6,23 @@
   margin: 5rem 0;
 }
 
-
 .card-commande {
   padding: 1rem 3rem;
-  box-shadow: 0 0 2px 3px var(--borders);
-  width: 250px;
-  word-break: break-word;
 
-  *:not(:first-child) {
-    margin-top: 1rem;
-  }
+  p { margin-bottom: 1rem; }
 
   h3 {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
-  span {
-    font-weight: bolder;
-  }
+
+  span { font-weight: bolder; }
 
   .commande-actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+  .btn-danger { margin-left: auto; }
 
-  .btn-danger {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 0 auto;
-  }
 }

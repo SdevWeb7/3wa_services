@@ -12,23 +12,17 @@
     padding: 1rem;
     color: var(--text);
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+    h2 { margin-bottom: 1rem; font-size: 2rem; }
 
-    label {
-      font-size: 1.5rem;
-      margin: 1rem 0;
-    }
+    label { margin: 1rem 0; }
+
     input {
       padding: .5rem 1rem;
       border-radius: 4px;
       margin-bottom: 1rem;
     }
-
-
   }
+
   .btn-success {
     display: block;
     width: 100%;

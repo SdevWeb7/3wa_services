@@ -29,7 +29,7 @@ export const CardService = ({service}) => {
             addToast('info', 'Vous n\'avez pas assez de CommuniTokens pour commander ce service.');
             return;
         }
-        if (!dateRef.current.value) {
+        if (!dateRef.current?.value) {
             addToast('info', 'Veuillez renseigner une date pour la commande.');
             return;
         }
@@ -57,7 +57,7 @@ export const CardService = ({service}) => {
    return <>
        <article
           key={service.id}
-          className={'service'}>
+          className={'card'}>
 
            <p><span>Catégorie :</span> {service.category_name}</p>
            <h2>{service.title}</h2>
@@ -85,15 +85,13 @@ export const CardService = ({service}) => {
                </button>
            </div>
            <input className={'input-date'} ref={dateRef} type="datetime-local"/>
-
+           <p className={'p-date'}>Veuillez sélectionner une date</p>
 
            <div className="footer-card">
-               <p><span>Ajouté par :</span> {service.pseudonyme} qui a déjà
-                   rendu {service.services_rendered} service(s).</p>
+               <p><span>Par :</span> {service.pseudonyme}</p>
+               <p><span>{service.services_rendered} service(s)</span> rendu(s).</p>
 
-               <p>
-                   <span>Le : </span>{new Date(service.created_at).toLocaleDateString()} à {new Date(service.created_at).toLocaleTimeString()}
-               </p>
+               <p><span>Le : </span>{new Date(service.created_at).toLocaleDateString()} à {new Date(service.created_at).toLocaleTimeString()}</p>
            </div>
 
 

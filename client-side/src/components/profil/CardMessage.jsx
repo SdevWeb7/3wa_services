@@ -30,7 +30,7 @@ export const CardMessage = ({message, setMessages}) => {
 
 
    return <>
-       <article className={'card-message'}>
+       <article className={'card card-message'}>
 
 
            <p><span>Message de :</span> {message.sender_pseudonyme}</p>

@@ -50,10 +50,10 @@ export const ChangePasswordForm = () => {
    return <>
        <form
           style={{marginTop: "3rem"}}
-          className={"auth-form"}
+          className={"form"}
           onSubmit={handleForm}>
 
-           <h2>Changer mon mode de passe</h2>
+           <h3>Changer mon mode de passe</h3>
 
            <label
               className={'label'}

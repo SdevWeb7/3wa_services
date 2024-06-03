@@ -59,7 +59,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
    }
 
 
-   return <article className={'card-commande'}>
+   return <article className={'card card-commande'}>
 
       <h3>{commande.title}</h3>
       <p><span>Le :</span> {new Date(commande.created_at).toLocaleDateString()}</p>

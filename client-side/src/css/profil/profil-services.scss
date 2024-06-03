@@ -10,6 +10,7 @@
   label {
     font-size: 1.5rem;
     margin-bottom: .4rem;
+    font-weight: bolder;
   }
   label:not(:first-child), .btn {
     margin-top: 2rem;
@@ -27,7 +28,7 @@
 }
 .add-service-handler {
   display: block;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 table {
