@@ -65,7 +65,7 @@ export const CardService = ({service}) => {
            <img
               src={imgSrc}
               width={230}
-              alt={service.title}/>
+              alt={service.title} />
 
            <p style={{textAlign: 'center', marginBottom: "3rem"}}>{service.description}</p>
 
@@ -80,12 +80,20 @@ export const CardService = ({service}) => {
                </button>
 
                <button
+                  aria-haspopup={'dialog'}
                   onClick={handleMessageModal}
                   className="btn btn-secondary">Contacter
                </button>
            </div>
-           <input className={'input-date'} ref={dateRef} type="datetime-local"/>
-           <p className={'p-date'}>Veuillez sélectionner une date</p>
+
+           <input
+              ref={dateRef}
+              id={"date-commande"}
+              className={'input-date'}
+              type="datetime-local" />
+           <label
+              className={'label-date'}
+              htmlFor="date-commande">Sélectionnez une date</label>
 
            <div className="footer-card">
                <p><span>Par :</span> {service.pseudonyme}</p>

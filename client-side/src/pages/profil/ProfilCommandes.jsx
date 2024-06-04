@@ -36,7 +36,7 @@ export const ProfilCommandes = () => {
       <h2>Commandes reçues</h2>
 
       <section className="container-commandes">
-         {commandesRecues && Object.keys(commandesRecues).length > 0 ? commandesRecues.map(commande => <CardCommande key={commande.id} commande={commande} setCommandes={setCommandesRecues} />) : <p>Vous n'avez pas de commandes reçues</p>}
+         {commandesRecues && Object.keys(commandesRecues).length > 0 ? commandesRecues.map(commande => <CardCommande key={commande.id} commande={commande} setCommandes={setCommandesRecues} />) : <p>Vous n&apos;avez pas de commandes reçues</p>}
       </section>
 
 
@@ -45,7 +45,10 @@ export const ProfilCommandes = () => {
       <h2 style={{marginTop: "80px"}}>Commandes passées</h2>
 
       <section className="container-commandes">
-         {commandesPasses && Object.keys(commandesPasses).length > 0 ? commandesPasses.map(commande => <CardCommande key={Math.floor(Math.random() * 100000)} commande={commande} finalisable={false} setCommandes={setCommandesPasses} />) : <p>Vous n'avez pas de commandes passées</p>}
+         {commandesPasses && Object.keys(commandesPasses).length > 0 ? commandesPasses.map(commande => <CardCommande
+            key={Math.floor(Math.random() * 100000)}
+            commande={commande} finalisable={false}
+            setCommandes={setCommandesPasses} />) : <p>Vous n'avez pas de commandes passées</p>}
       </section>
 
    </>;

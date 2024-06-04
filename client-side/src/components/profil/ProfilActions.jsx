@@ -55,6 +55,7 @@ export const ProfilActions = () => {
             </button>
 
             <button
+               aria-haspopup={'dialog'}
                onClick={() => deleteModal.current.showModal()}
                className="btn btn-danger delete-btn">Supprimer mon profil
             </button>
@@ -88,6 +89,7 @@ export const ProfilActions = () => {
             </form>
 
             <button
+               aria-label={'Annuler et fermer la modal'}
                className="btn btn-success"
                onClick={() => deleteModal.current.close()}>Annuler</button>
          </dialog></>;

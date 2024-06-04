@@ -47,11 +47,14 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
    }
 
 
-   return createPortal(<section onClick={() => setIsOpen(false)} className={'send-message-modal'}>
+   return createPortal(<>
+      <section onClick={() => setIsOpen(false)} className={'send-message-modal'}>
 
 
       <form onSubmit={e => e.preventDefault()}>
-         <IconClose onClick={() => setIsOpen(false)}  />
+         <IconClose
+            aria-label={'Fermer la fenêtre'}
+            onClick={() => setIsOpen(false)} />
 
          <label htmlFor="subject">Le Sujet du message</label>
          <input
@@ -73,6 +76,6 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
 
       </form>
 
-   </section>, document.body);
+   </section></>, document.body);
 
 }

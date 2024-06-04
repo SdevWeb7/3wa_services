@@ -100,8 +100,7 @@ export const ChangePasswordForm = () => {
            <button
               className={`btn btn-tertiary ${isValid ? '' : 'disabled-btn'}`}
               type="submit"
-              disabled={! isValid}>Valider
-           </button>
+              disabled={! isValid}>Valider</button>
        </form>
 
         <ProfilActions />

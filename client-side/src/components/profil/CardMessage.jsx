@@ -41,12 +41,14 @@ export const CardMessage = ({message, setMessages}) => {
 
            <div className="card-buttons">
                <button
+                  aria-haspopup={'dialog'}
                   onClick={() => setAnswMessageModalIsOpen(true)}
                   style={{padding: '1rem'}}
                   className="btn btn-primary">Répondre
                </button>
 
                <button
+                  aria-label={'Supprimer le message'}
                   onClick={deleteMessage}
                   className="btn btn-danger"><IconTrash/></button>
            </div>

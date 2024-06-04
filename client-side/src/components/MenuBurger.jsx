@@ -8,7 +8,9 @@ export const MenuBurger = ({handleMenu}) => {
 
    return createPortal(<nav className={'menu-burger'}>
 
-       <IconClose onClick={handleMenu} />
+       <IconClose
+          aria-label={'Fermer le menu'}
+          onClick={handleMenu} />
 
        <Link onClick={handleMenu} className={'navlink'} to={'/'}>Home</Link>
        <Link onClick={handleMenu} className={'navlink'} to={'/services'}>Services</Link>

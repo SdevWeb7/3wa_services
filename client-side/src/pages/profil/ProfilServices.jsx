@@ -43,6 +43,7 @@ export const ProfilServices = () => {
       <h1>Mes services</h1>
 
       <button
+         aria-expanded={addFormIsOpen}
          className={'btn btn-secondary add-service-handler'}
          onClick={() => setAddFormIsOpen(!addFormIsOpen)}>
             {addFormIsOpen ? 'Fermer le formulaire' : 'Ajouter un service'}</button>
@@ -66,6 +67,7 @@ export const ProfilServices = () => {
                   <td>{service.title}</td>
                   <td>{service.category_name}</td>
                   <td><button
+                        aria-label={'Supprimer le service'}
                         onClick={() => deleteService(service.id)}
                         style={{padding: '3px'}}
                         className={'btn btn-danger'}><IconTrash /></button></td>

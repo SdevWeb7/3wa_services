@@ -27,7 +27,9 @@ export function Toaster () {
 
         {toasts.length > 0 && <div className="toaster">
 
-               <IconClose onClick={() => setToasts([])} />
+               <IconClose
+                  aria-label={'Fermer les notifications'}
+                  onClick={() => setToasts([])} />
 
                {toasts.map(({type, message}) => <p key={Math.floor(Math.random()*100000)} className={findClassByType(type)}>{message}</p>)}
 

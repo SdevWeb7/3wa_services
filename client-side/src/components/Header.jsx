@@ -11,23 +11,34 @@ export const Header = () => {
    }
 
    return <>
+      <header>
+       <nav className={'header'}>
+          <Link
+             title={'Accueil du site'}
+             className={'logo'}
+             to={'/'}>Community-Services</Link>
 
-       <header className={'header'}>
-          <Link className={'logo'} to={'/'}>Community-Services</Link>
+           <div className={'navbar'}>
+               <Link
+                  className={'navlink'}
+                  to="/services">Tous les services</Link>
+           </div>
+            <Link
+               className={"navlink btn btn-tertiary"}
+               to="/profil">Profil</Link>
 
-           <nav className={'navbar'}>
-               <Link className={'navlink'} to="/services">Tous les services</Link>
-
-
-           </nav>
-            <Link className={"navlink btn btn-tertiary"} to="/profil">Profil</Link>
-
-           <Link className="burger btn" onClick={handleMenu}>
+           <Link
+              aria-haspopup={'menu'}
+              aria-expanded={isOpenMenu}
+              aria-label={"Ouvrir le menu de navigation"}
+              className="burger btn"
+              onClick={handleMenu}>
               <IconBurger />
            </Link>
 
             {isOpenMenu && <MenuBurger handleMenu={handleMenu} />}
-       </header>
+       </nav>
+      </header>
    </>
 
 }

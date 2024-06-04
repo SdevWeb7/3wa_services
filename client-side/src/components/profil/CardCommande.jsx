@@ -77,6 +77,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
                               className={'btn btn-secondary'}>Finaliser</button>}
 
          <button
+            aria-label={'Supprimer la commande'}
             onClick={handleDelete}
             className="btn btn-danger"><IconTrash /></button>
       </div>
