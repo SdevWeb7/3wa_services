@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Spinner } from "../../components/Spinner.jsx";
 import { useAppStore } from "../../utils/store.js";
 import { useNavigate } from "react-router-dom";

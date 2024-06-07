@@ -1,6 +1,7 @@
 import { IconTrash } from "../../svg/IconTrash.jsx";
 import { useAppStore } from "../../utils/store.js";
 import { myContext } from "../../hooks/MyContextProvider.jsx";
+import { useContext } from "react";
 
 export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
    const addToast = useAppStore.use.addToast();

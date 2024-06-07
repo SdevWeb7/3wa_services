@@ -19,8 +19,8 @@ export const ProfilCommandes = () => {
          }
       }).then(response => response.json())
          .then(data => {
-            setCommandesPasses(data[0])
-            setCommandesRecues(data[1])
+            setCommandesPasses(data[0] || []);
+            setCommandesRecues(data[1] || []);
          })
          .catch(error => {
             console.error(error);

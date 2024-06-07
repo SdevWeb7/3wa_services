@@ -10,7 +10,7 @@ export const ProfilMessagerie = () => {
          credentials: 'include'
       })
       .then(res => res.json())
-      .then(data => setMessages(data))
+      .then(data => setMessages(data || []))
    }, [])
 
 

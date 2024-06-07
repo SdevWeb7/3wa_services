@@ -19,8 +19,8 @@ export const Services = () => {
       })
          .then(res => res.json())
          .then(data => {
-            setServices(data[0])
-            setTotalServices(data[1])
+            setServices(data[0] || []);
+            setTotalServices(data[1] || 0);
          })
          .catch(err => console.error(err));
    }, [page, searchKey]);

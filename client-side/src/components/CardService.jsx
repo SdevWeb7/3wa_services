@@ -34,6 +34,11 @@ export const CardService = ({service}) => {
             return;
         }
         try {
+            // Conversion de la date en format MySQL
+            const dateObj = new Date(dateRef.current.value);
+            const pad = (number) => number.toString().padStart(2, '0');
+            const mysqlDateStr = `${dateObj.getFullYear()}-${pad(dateObj.getMonth() + 1)}-${pad(dateObj.getDate())} ${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}:${pad(dateObj.getSeconds())}`;
+
             const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/commandes/add/${service.id}`, {
                 method: 'POST',
                 credentials: 'include',
@@ -41,7 +46,7 @@ export const CardService = ({service}) => {
                      'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({
-                     date: new Date(dateRef.current.value)
+                     date: new Date(mysqlDateStr)
                   })
             })
             const data = await response.json();
