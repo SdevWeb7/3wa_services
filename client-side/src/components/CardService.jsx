@@ -38,7 +38,7 @@ export const CardService = ({service, setService}) => {
                      'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({
-                     date: new Date(mysqlDateStr)
+                     date: mysqlDateStr
                   })
             })
             const data = await response.json();
