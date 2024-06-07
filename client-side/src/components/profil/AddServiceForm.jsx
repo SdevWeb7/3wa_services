@@ -112,6 +112,8 @@ export const AddServiceForm = ({setServices, categories = []}) => {
 
              <label htmlFor={'duration'}>Durée (en heures)</label>
              <input
+                min={1}
+                max={7}
                 value={formData.duration}
                 id={"duration"}
                 type="number"
