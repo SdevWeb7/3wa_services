@@ -21,7 +21,8 @@ class Service {
             JOIN user as u ON u.id = s.user_id
             JOIN category as c ON c.id = s.category_id
             WHERE user_id != ?
-            AND (s.title LIKE ? OR s.description LIKE ?) 
+            AND (s.title LIKE ? OR s.description LIKE ?)
+            AND isReported = 0
             ORDER BY s.created_at DESC LIMIT ? OFFSET ?`,
             [userId, formattedSearchKey, formattedSearchKey,
                String(perPage), String(offset)]);
@@ -67,7 +68,7 @@ class Service {
             [id, userId]);
       }
 
-      static async getService (id) {
+      static async getServiceImg (id) {
          const [service] = await pool.execute(`
             SELECT img_src FROM service
             WHERE id = ?`,
@@ -75,6 +76,15 @@ class Service {
 
          return service[0];
       }
+
+      static async reportService (id) {
+         await pool.execute(`
+            UPDATE service
+            SET isReported = 1
+            WHERE id = ?`,
+            [id]);
+      }
+
 }
 
 

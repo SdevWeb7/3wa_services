@@ -29,6 +29,7 @@ class User {
             email: result.email,
             pseudonyme: result.pseudonyme,
             isBanned: result.isBanned,
+            role: result.role,
             sold: result.sold,
             services_rendered: result.services_rendered,
             created_at: result.created_at
@@ -59,7 +60,7 @@ class User {
    static async findById(id){
       const result = await pool.execute(`
          SELECT id, email, pseudonyme, sold,
-                services_rendered, created_at, isBanned
+                services_rendered, created_at, isBanned, role
          FROM user WHERE id = ?`,
          [id]);
       return result[0][0];

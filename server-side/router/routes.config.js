@@ -4,6 +4,7 @@ import authRoutes from "./auth.routes.js";
 import messagerieRoutes from "./messagerie.routes.js";
 import servicesRoutes from "./services.routes.js";
 import commandesRoutes from "./commandes.routes.js";
+import adminRoutes from "./admin.routes.js";
 
 
 const router = Router();
@@ -28,5 +29,8 @@ router.use('/api/messagerie', messagerieRoutes);
 // Commandes
 router.use('/api/commandes', commandesRoutes);
 
+
+// Admin
+router.use('/api/admin', adminRoutes);
 
 export default router;

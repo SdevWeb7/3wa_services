@@ -52,7 +52,7 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
                if (c.id === commande.id) return {...c, status: 'Finalisée'};
                return c;
             }));
-            setUser((user) => ({...user, solde: user.solde - commande.cost}));
+            setUser((user) => ({...user, solde: user.solde + commande.cost}));
          }
       } catch (error) {
          addToast('error', 'Il y a eu un problème.');

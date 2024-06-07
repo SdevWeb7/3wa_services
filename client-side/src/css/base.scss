@@ -16,7 +16,7 @@ body {
 
 .main {
   padding: 0 1rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -41,6 +41,7 @@ li:not(:last-child) { margin-bottom: 1rem; }
 .links-home {
   text-align: center;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
   gap: 2rem;
   margin-top: 4rem;
@@ -49,4 +50,10 @@ li:not(:last-child) { margin-bottom: 1rem; }
 
 @media screen and (min-width: 800px) {
   html { font-size: 80%; }
+}
+@media screen and (min-width: 600px) {
+  .links-home {
+    flex-direction: row-reverse;
+  }
+
 }

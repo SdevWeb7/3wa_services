@@ -1,7 +1,7 @@
 .container-services {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   gap: 3rem;
 
 
@@ -38,6 +38,15 @@
     margin-top: 2rem;
 
     p { margin: 0; }
+  }
+
+  .warning {
+    cursor: pointer;
+    background-color: transparent;
+    color: red;
+    border: none;
+    margin: 1rem 0 0 auto;
+    font-size: 1.5rem;
   }
 }
 

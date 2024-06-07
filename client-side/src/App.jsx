@@ -10,6 +10,7 @@ import { myContext } from "./hooks/MyContextProvider.jsx";
 import { ProfilMessagerie } from "./pages/profil/ProfilMessagerie.jsx";
 import { ProfilCommandes } from "./pages/profil/ProfilCommandes.jsx";
 import { ProfilServices } from "./pages/profil/ProfilServices.jsx";
+import { AdminDashboard } from "./pages/admin/AdminDashboard.jsx";
 
 
 function App() {
@@ -41,6 +42,8 @@ function App() {
 
 
                <Route path={'services'} element={<Services />} />
+
+               <Route path={"/admin"} element={<AdminDashboard />} />
 
 
                <Route path={'*'} element={<h1>404 Not Found :(</h1>} />

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { IconBurger } from "../svg/IconBurger.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MenuBurger } from "./MenuBurger.jsx";
+import { myContext } from "../hooks/MyContextProvider.jsx";
 
 export const Header = () => {
+   const {user} = useContext(myContext);
    const [isOpenMenu, setIsOpenMenu] = useState(false);
 
    const handleMenu = () => {
@@ -22,6 +24,10 @@ export const Header = () => {
                <Link
                   className={'navlink'}
                   to="/services">Tous les services</Link>
+
+              {user && user.role === 'admin' && <Link
+                  className={'navlink'}
+                  to="/admin">Admin</Link>}
            </div>
             <Link
                className={"navlink btn btn-tertiary"}

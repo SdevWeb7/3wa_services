@@ -4,21 +4,13 @@ import { myContext } from "../hooks/MyContextProvider.jsx";
 import { useAppStore } from "../utils/store.js";
 
 
-export const CardService = ({service}) => {
+export const CardService = ({service, setService}) => {
     const {user} = useContext(myContext);
     const [sendMessageModalIsOpen, setSendMessageModalIsOpen] = useState(false);
     const addToast = useAppStore.use.addToast()
     const dateRef = useRef(null);
     const imgSrc = service.img_src === 'http://via.placeholder.com/640x360' ? service.img_src : `${import.meta.env.VITE_BASE_URL_BACKEND}/img/${service.img_src}`;
 
-
-    const handleMessageModal = () => {
-        if (user && user.email) {
-            setSendMessageModalIsOpen(true);
-        } else {
-            addToast("info", "Vous devez être connecté pour contacter un utilisateur.");
-        }
-    }
 
     const handleOrder = async () => {
         if (!user || !user.email) {
@@ -58,6 +50,30 @@ export const CardService = ({service}) => {
         }
     }
 
+    const handleMessageModal = () => {
+        if (user && user.email) {
+            setSendMessageModalIsOpen(true);
+        } else {
+            addToast("info", "Vous devez être connecté pour contacter un utilisateur.");
+        }
+    }
+
+    const reportService = async () => {
+         try {
+               const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/services/report/${service.id}`, {
+                  method: 'PATCH',
+                  credentials: 'include'
+               })
+               const data = await response.json();
+               if (data.err) addToast('error', 'Il y a eu une erreur lors du signalement. Veuillez réessayer.');
+               else {
+                   addToast('success', 'Service signalé avec succès !');
+                   setService(prevState => prevState.filter(s => s.id !== service.id));
+               }
+         } catch (error) {
+               addToast('error', 'Il y a eu une erreur lors du signalement. Veuillez réessayer.');
+         }
+    }
 
    return <>
        <article
@@ -113,6 +129,9 @@ export const CardService = ({service}) => {
               toUserId={service.user_id} />}
 
 
+           <button
+              onClick={reportService}
+              className={'warning'}>Signaler</button>
        </article>
    </>
 

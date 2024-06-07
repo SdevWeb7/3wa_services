@@ -59,8 +59,10 @@ export const Services = () => {
          <section className="container-services">
 
             {services && services.length > 0 ? services.map(service => {
-
-               return <CardService key={service.id} service={service} />
+               return <CardService
+                           key={service.id}
+                           service={service}
+                           setService={setServices} />
             }) : <p>Aucun service pour le moment.</p>}
 
          </section>
