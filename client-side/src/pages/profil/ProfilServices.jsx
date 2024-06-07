@@ -16,8 +16,8 @@ export const ProfilServices = () => {
          credentials: 'include'
       }).then(response => response.json())
         .then(result => {
-           setServices(result[0]);
-           setCategories(result[1]);
+           setServices(result[0] || []);
+           setCategories(result[1] || []);
         })
         .catch(err => console.log(err));
    }, []);

@@ -1,8 +1,10 @@
 import { IconTrash } from "../../svg/IconTrash.jsx";
 import { useAppStore } from "../../utils/store.js";
+import { myContext } from "../../hooks/MyContextProvider.jsx";
 
 export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
    const addToast = useAppStore.use.addToast();
+   const {setUser} = useContext(myContext);
 
    const handleDelete = async () => {
       try {
@@ -46,12 +48,10 @@ export const CardCommande = ({commande, setCommandes, finalisable = true}) => {
          } else {
             addToast('success', data.message);
             setCommandes((commandes) => commandes.map((c) => {
-               if (c.id === commande.id) {
-                  return {...c, status: 'Finalisée'};
-               }
+               if (c.id === commande.id) return {...c, status: 'Finalisée'};
                return c;
-
             }));
+            setUser((user) => ({...user, solde: user.solde - commande.cost}));
          }
       } catch (error) {
          addToast('error', 'Il y a eu un problème.');

@@ -17,14 +17,13 @@
     max-width: 500px;
   }
 
-  label { margin-top: 2rem; }
+  label { margin: 2rem 0 .5rem 0; }
   input, textarea {
     padding: 1rem;
-    margin: 1rem 0;
     border: 1px solid var(--borders);
     border-radius: 5px;
   }
-  textarea { height: 100px; }
+  textarea { width: 100%!important; height: 100px; resize: none; }
 
   svg {
     align-self: flex-end;
@@ -32,5 +31,11 @@
     height: 20px;
     margin-right: -2rem;
     cursor: pointer;
+  }
+  span {
+    text-align: right;
+  }
+  .btn {
+    margin-top: 2rem;
   }
 }

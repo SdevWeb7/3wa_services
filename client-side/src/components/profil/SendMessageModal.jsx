@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import { IconClose } from "../../svg/IconClose.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppStore } from "../../utils/store.js";
 
 export const SendMessageModal = ({setIsOpen, toUserId}) => {
@@ -10,9 +10,20 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
       content: '',
       toUserId: toUserId
    });
-   const isValidSubject = formDatas.subject.length > 5;
+   const isValidSubject = formDatas.subject.length >= 3;
    const isValidContent = formDatas.subject.length > 5;
 
+   useEffect(() => {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+   }, [])
+
+
+   const handleClickOutside = (e) => {
+      if (e.target.classList.contains('send-message-modal')) {
+         setIsOpen(false);
+      }
+   }
 
    const onInputChange = (e) => {
       setFormDatas({
@@ -48,7 +59,7 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
 
 
    return createPortal(<>
-      <section onClick={() => setIsOpen(false)} className={'send-message-modal'}>
+      <section className={'send-message-modal'}>
 
 
       <form onSubmit={e => e.preventDefault()}>
@@ -62,6 +73,7 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
             id={'subject'}
             type="text"
             placeholder={'Sujet du message'} />
+         {!isValidSubject && <span className="error">Le sujet doit contenir au moins 3 caractères</span>}
 
          <label htmlFor="content">Votre message</label>
          <textarea
@@ -69,6 +81,7 @@ export const SendMessageModal = ({setIsOpen, toUserId}) => {
             placeholder={'Votre message'}
             name="content"
             id="content"></textarea>
+         {!isValidContent && <span className="error">Le message doit contenir au moins 5 caractères</span>}
 
          <button
             onClick={handleSendMessage}

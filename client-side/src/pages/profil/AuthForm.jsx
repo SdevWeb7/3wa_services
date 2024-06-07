@@ -8,43 +8,35 @@ export const AuthForm = () => {
     const navigation = useNavigate();
     const { user, setUser } = useContext(myContext);
     const addToast = useAppStore.use.addToast();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [action, setAction] = useState('login');
-    const [pseudonyme, setPseudonyme] = useState('');
-    const [isValid, setIsValid] = useState(false);
-    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        pseudonyme: '',
+        action: 'login'
+    });
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // const regexPassword = /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    const regexPassword = /.*/;
+    const isEmailValid = regexEmail.test(formData.email);
+    const isPasswordValid = formData.password.length > 7 && regexPassword.test(formData.password);
+    const isPseudonymeValid = formData.pseudonyme.length > 2;
+    const isFormValid = formData.action === "login" ? isEmailValid && isPasswordValid : isEmailValid && isPasswordValid && isPseudonymeValid;
 
-    useEffect(() => {
-        if (action === 'login') {
-            if (regexEmail.test(email) && password.length > 3) {
-                setIsValid(true);
-            } else {
-                setIsValid(false);
-            }
-        } else {
-            if (regexEmail.test(email) && password.length > 3 && pseudonyme.length > 3) {
-                setIsValid(true);
-            } else {
-                setIsValid(false);
-            }
-        }
-    }, [password, email, pseudonyme, action]);
 
 
 
     const handleForm = async (e) => {
         e.preventDefault();
-        if (!isValid) return;
+        if (!isFormValid) return;
 
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/auth/${action}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/auth/${formData.action}`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email: email,
-                password: password,
-                pseudonyme: pseudonyme
+                email: formData.email,
+                password: formData.password,
+                pseudonyme: formData.pseudonyme
             }),
         })
 
@@ -57,6 +49,9 @@ export const AuthForm = () => {
         } else {
             addToast('error', result.message);
         }
+    }
+    const handleInputChanges = (e) => {
+         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
 
@@ -77,10 +72,10 @@ export const AuthForm = () => {
                    type="email"
                    name={'email'}
                    id={"email"}
-                   value={email}
-                   onChange={e => setEmail(e.target.value)}
+                   value={formData.email}
+                   onChange={handleInputChanges}
                    placeholder={"Votre e-mail"}/>
-                {! regexEmail.test(email) && <span>Exemple : test@test.fr</span>}
+                {!isEmailValid && <span>Exemple : test@test.fr</span>}
 
 
                 <label className={'label'} htmlFor="password">Votre mot de passe</label>
@@ -89,26 +84,26 @@ export const AuthForm = () => {
                    type="password"
                    name={'password'}
                    id={"password"}
-                   value={password}
-                   onChange={e => setPassword(e.target.value)}
+                   value={formData.password}
+                   onChange={handleInputChanges}
                    placeholder={'Votre mot de passe'}/>
-                {password.length < 4 && <span>Au moins 4 caractères</span>}
+                {!isPasswordValid && <span>Au moins 8 caractères</span>}
 
-                {action === 'subscribe' && <>
+                {formData.action === 'subscribe' && <>
                     <label className={'label'} htmlFor="pseudonyme">Choisissez un pseudonyme</label>
                     <input
-                       onChange={e => setPseudonyme(e.target.value)}
+                       onChange={handleInputChanges}
                        className={"input"}
                        type="pseudonyme"
                        name={'pseudonyme'}
                        id={"pseudonyme"}
                        placeholder={'Entrez votre pseudonyme'} />
-                    {pseudonyme.length < 4 && <span>Au moins 4 caractères</span>}</>}
+                    {!isPseudonymeValid && <span>Au moins 3 caractères</span>}</>}
 
                 <div className="radios">
                     <label htmlFor="login">Se connecter</label>
                     <input
-                       onChange={e => setAction(e.target.value)}
+                       onChange={handleInputChanges}
                        type="radio"
                        value={'login'}
                        defaultChecked={true}
@@ -117,7 +112,7 @@ export const AuthForm = () => {
 
                     <label htmlFor="subscribe">S&apos;inscrire</label>
                     <input
-                       onChange={e => setAction(e.target.value)}
+                       onChange={handleInputChanges}
                        type="radio"
                        value={'subscribe'}
                        name={"action"}
@@ -125,9 +120,9 @@ export const AuthForm = () => {
                 </div>
 
                 <button
-                   className={`btn btn-tertiary ${isValid ? '' : 'disabled-btn'}`}
+                   className={`btn btn-tertiary ${isFormValid ? '' : 'disabled-btn'}`}
                    type="submit"
-                   disabled={! isValid}>Valider</button>
+                   disabled={! isFormValid}>Valider</button>
             </form>
         </>;
 }
