@@ -69,7 +69,7 @@ export const ProfilActions = () => {
 
             <form onSubmit={deleteUser}>
 
-               <h2>Vous êtes sur le point de supprimer votre compte.</h2>
+               <h2 style={{color: 'var(--text)'}}>Vous êtes sur le point de supprimer votre compte.</h2>
 
                <p className={'warning'}>Attention cette opération est irréversible !</p>
 
