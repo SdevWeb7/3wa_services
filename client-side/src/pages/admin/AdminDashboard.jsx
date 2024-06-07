@@ -16,8 +16,6 @@ export const AdminDashboard = () => {
                .catch(e => console.error(e))
     }, []);
 
-    console.log(reportedServices)
-
 
     const handleDelete = (id) => {
          fetch(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/admin/delete/${id}`, {
