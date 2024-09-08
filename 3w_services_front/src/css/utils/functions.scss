@@ -1,4 +1,0 @@
-
-@function px-to-rem($pixels, $root-font-size: 16) {
-  @return #{$pixels / $root-font-size}rem;
-}
