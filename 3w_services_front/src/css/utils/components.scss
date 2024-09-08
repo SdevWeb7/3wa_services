@@ -1,0 +1,74 @@
+.navlink, .navlink:visited, a:not(.logo):not(.btn) {
+  border-bottom: 1px solid transparent;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navlink:hover, a:not(.logo):not(.btn):hover {
+  border-color: var(--text);
+}
+.warning { color: var(--danger); }
+
+
+.card {
+  padding: 1rem;
+  background-color: var(--background);
+  box-shadow: 0 0 10px var(--borders);
+  border-radius: 2px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btn {
+  cursor: pointer;
+  font-size: 22px;
+  padding: 13px 12px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all .2s;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 3px 3px var(--borders);
+  }
+}
+.btn-primary {
+  background-color: var(--primary);
+  color: black;
+}
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--text);
+}
+.btn-tertiary {
+  background-color: var(--accent);
+  color: var(--text);
+}
+.btn-danger {
+  background-color: var(--danger);
+  color: whitesmoke;
+}
+.btn-success {
+    background-color: var(--success);
+    color: whitesmoke;
+}
+.disabled-btn {
+  cursor: not-allowed;
+  opacity: .5;
+
+  &:hover {
+    filter: none;
+    box-shadow: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 400px;
+  }
+
+}

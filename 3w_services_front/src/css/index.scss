@@ -1,0 +1,22 @@
+
+@import 'utils/colors-theme.scss';
+@import 'utils/mixins';
+@import 'utils/functions';
+@import 'utils/fonts';
+@import 'base';
+@import 'services';
+@import 'header/header';
+@import 'header/menu-burger';
+@import 'admin/dashboard';
+@import 'profil/profil-layout';
+@import 'profil/profil-services';
+@import 'utils/components';
+@import 'profil/form';
+@import 'utils/toaster';
+@import 'utils/scrollbar';
+@import 'utils/spinner';
+@import 'profil/delete-user-modal';
+@import 'profil/send-message-modal';
+@import 'profil/messagerie';
+@import 'profil/commandes';
+@import 'footer/footer';

@@ -1,0 +1,66 @@
+.add-service-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 800px;
+  margin: 20px auto 0 auto;
+  animation: addFormApparition 1s;
+
+  label {
+    font-size: 1.5rem;
+    margin-bottom: .4rem;
+    font-weight: bolder;
+  }
+  label:not(:first-child), .btn {
+    margin-top: 2rem;
+  }
+  input, textarea, select {
+    resize: none;
+    border-radius: 4px;
+    padding: 1rem;
+    border: 1px solid grey;
+  }
+  span {
+    text-align: right;
+    font-size: 1.2rem;
+  }
+}
+.add-service-handler {
+  display: block;
+  margin: 2rem auto;
+}
+
+table {
+  margin: 4rem auto 0 auto;
+  font-size: 1.4rem;
+  width: 100%;
+  max-width: 900px;
+  text-align: left;
+  border-collapse: collapse;
+
+  th {
+    text-align: center;
+  }
+  th:last-child, td:last-child {
+    width: 15%;
+  }
+  th, td {
+    border: 1px solid grey;
+    padding: .5rem;
+  }
+
+  .btn {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@keyframes addFormApparition {
+  from {
+    opacity: 0;
+  }
+    to {
+        opacity: 1;
+    }
+}

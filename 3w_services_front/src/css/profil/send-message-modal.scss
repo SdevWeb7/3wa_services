@@ -1,0 +1,41 @@
+.send-message-modal {
+  position: fixed;
+  inset: 0;
+  background-color: var(--borders);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 4rem;
+    background-color: var(--background);
+    width: 90%;
+    max-width: 500px;
+  }
+
+  label { margin: 2rem 0 .5rem 0; }
+  input, textarea {
+    padding: 1rem;
+    border: 1px solid var(--borders);
+    border-radius: 5px;
+  }
+  textarea { width: 100%!important; height: 100px; resize: none; }
+
+  svg {
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+    margin-right: -2rem;
+    cursor: pointer;
+  }
+  span {
+    text-align: right;
+  }
+  .btn {
+    margin-top: 2rem;
+  }
+}

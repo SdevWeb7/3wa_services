@@ -1,0 +1,59 @@
+
+html { font-size: 62.5%; }
+
+html, body, * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Inter';
+  font-weight: 400;
+  background-color: var(--background);
+  color: var(--text);
+  word-break: break-word;
+}
+
+.main {
+  padding: 0 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 { font-weight: 700; font-family: "LucioleRegular"; }
+
+h1, h2 {
+  font-size: 5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+h2 { font-size: 3rem; }
+
+h3 { font-size: 2.5rem; }
+
+p, li, input, label, a, textarea, select { font-size: 1.8rem; }
+
+li { margin-left: 2rem; }
+li:not(:last-child) { margin-bottom: 1rem; }
+
+
+.links-home {
+  text-align: center;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+
+@media screen and (min-width: 800px) {
+  html { font-size: 80%; }
+}
+@media screen and (min-width: 600px) {
+  .links-home {
+    flex-direction: row-reverse;
+  }
+
+}
