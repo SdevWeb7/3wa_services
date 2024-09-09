@@ -1,0 +1,6 @@
+$i++;
+$cfg['Servers'][$i]['host'] = 'adresse_de_ton_serveur_mysql'; // Adresse IP ou nom de domaine du serveur distant
+$cfg['Servers'][$i]['port'] = '3306'; // Port du serveur MySQL (si différent, modifie en conséquence)
+$cfg['Servers'][$i]['user'] = 'ton_utilisateur'; // Nom d'utilisateur pour se connecter à la base de données
+$cfg['Servers'][$i]['password'] = 'ton_mot_de_passe'; // Mot de passe pour se connecter à la base de données
+$cfg['Servers'][$i]['auth_type'] = 'config'; // Authentification basée sur les informations de config
